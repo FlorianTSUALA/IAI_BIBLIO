@@ -1,0 +1,974 @@
+RegimeMariage:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+    description:
+      type: string
+      
+FormeMariage:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+    description:
+      type: string
+      
+      
+TypePieceIdentite:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+    validite:
+      type: integer
+      notnull: true
+      
+      
+GroupeSanguin:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+      
+          
+PositionMilitaire:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true 
+      
+      
+SituationMatrimoniale:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+      
+      
+PieceJoint:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    description:
+      type: string
+    type:
+      type: string(255)
+      notnull: true
+    fichier:
+      type: string(255)
+      notnull: true
+    est_archive:
+      type: boolean
+    date_archivage:
+      type: date
+      
+      
+Naissance:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    sexe:
+      type: string(255)
+      notnull: true
+    date_naissance:
+      type: date
+      notnull: true
+    heure_naissance:
+      type: string(255)
+      notnull: true
+    lieu_naissance:
+      type: string(255)
+      notnull: true
+    filiation:
+      type: string(255)
+    nom_pere:
+      type: string(255)
+      notnull: true
+    prenom_pere:
+      type: string(255)
+    date_naissance_pere:
+      type: date
+      notnull: true
+    lieu_naissance_pere:
+      type: string(255)
+      notnull: true
+    profession_pere:
+      type: string(255)
+      notnull: true
+    lieu_residence_pere:
+      type: string(255)
+      notnull: true
+    nationalite_pere:
+      type: string(255)
+      notnull: true
+    nom_mere:
+      type: string(255)
+      notnull: true
+    prenom_mere:
+      type: string(255)
+    date_naissance_mere:
+      type: date
+      notnull: true
+    lieu_naissance_mere:
+      type: string(255)
+      notnull: true
+    profession_mere:
+      type: string(255)
+      notnull: true
+    lieu_residence_mere:
+      type: string(255)
+      notnull: true
+    nationalite_mere:
+      type: string(255)
+      notnull: true
+    nom_declarant:
+      type: string(255)
+      notnull: true
+    prenom_declarant:
+      type: string(255)
+    relation_declarant_enfant:
+      type: string(255)
+      notnull: true
+    telephone_declarant:
+      type: string(255)
+      notnull: true
+    date_entree_gabon_declarant:
+      type: date
+      notnull: true
+    personnes_cas_urgence:
+      type: string
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+      
+      
+FicheIndividuelleEtatCivil:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    photo:
+      type: string(255)
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    sexe:
+      type: string(255)
+      notnull: true
+    date_naissance:
+      type: date
+      notnull: true
+    ville_naissance:
+      type: string(255)
+      notnull: true
+    province_naissance:
+      type: string(255)
+    pays_naissance:
+      type: string(255)
+      notnull: true
+    nom_pere:
+      type: string(255)
+      notnull: true
+    prenom_pere:
+      type: string(255)
+    nom_mere:
+      type: string(255)
+      notnull: true
+    prenom_mere:
+      type: string(255)
+    nationalite:
+      type: string(255)
+      notnull: true
+    telephone:
+      type: string(255)
+      notnull: true
+    personnes_cas_urgence:
+      type: string
+    temoins:
+      type: string
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+    situation_matrimoniale_id:
+      type: integer
+    position_militaire_id:
+      type: integer
+  relations:
+    SituationMatrimoniale:
+      class: SituationMatrimoniale
+      local: id
+      foreign: fk_fiec_sm
+    PositionMilitaire:
+      class: PositionMilitaire
+      local: id
+      foreign: fk_fiec_pm
+      
+        
+LaissezPasser:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    photo:
+      type: string(255)
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    surnom:
+      type: string(255)
+    sexe:
+      type: string(255)
+      notnull: true
+    date_naissance:
+      type: date
+      notnull: true
+    lieu_naissance:
+      type: string(255)
+      notnull: true
+    nom_pere:
+      type: string(255)
+      notnull: true
+    prenom_pere:
+      type: string(255)
+    nom_mere:
+      type: string(255)
+      notnull: true
+    prenom_mere:
+      type: string(255)
+    nationalite:
+      type: string(255)
+      notnull: true
+    profession:
+      type: string(255)
+    motif_voyage:
+      type: string(255)
+    pays_provenance:
+      type: string(255)
+    adresse_burkina:
+      type: string(255)
+    telephone_burkina:
+      type: string(255)
+    adresse_gabon:
+      type: string(255)
+    telephone_gabon:
+      type: string(255)
+    date_depart:
+      type: date
+      notnull: true
+    date_retour:
+      type: date
+      notnull: true
+    duree_sejour:
+      type: string(255)
+    itineraire:
+      type: string(255)
+    duree_validite:
+      type: string(255)
+    personnes_cas_urgence:
+      type: string
+    temoins:
+      type: string
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+      
+      
+Immatriculation:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      notnull: true
+    matricule:
+      type: string(255)
+      notnull: true
+    photo:
+      type: string(255)
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    nom_pere:
+      type: string(255)
+      notnull: true
+    prenom_pere:
+      type: string(255)
+    nom_mere:
+      type: string(255)
+      notnull: true
+    prenom_mere:
+      type: string(255)
+    sexe:
+      type: string(255)
+      notnull: true
+    taille:
+      type: string(255)
+    teint:
+      type: string(255)
+    date_naissance:
+      type: date
+      notnull: true
+    ville_naissance:
+      type: string(255)
+      notnull: true
+    province_naissance:
+      type: string(255)
+    pays_naissance:
+      type: string(255)
+      notnull: true
+    nationalite:
+      type: string(255)
+    profession:
+      type: string(255)
+    ville_residence_gabon:
+      type: string(255)
+      notnull: true
+    province_residence_gabon:
+      type: string(255)
+    adresse_gabon:
+      type: string(255)
+    quartier_gabon:
+      type: string(255)
+    telephone_gabon:
+      type: string(255)
+    adresse_burkina:
+      type: string(255)
+    quartier_burkina:
+      type: string(255)
+    telephone_burkina:
+      type: string(255)
+    date_entree_gabon:
+      type: date
+    signalement:
+      type: string(255)
+    pays_provenance:
+      type: string(255)
+    signes_particuliers:
+      type: string
+    numero_piece_id:
+      type: string(255)
+    enfants_gabon:
+      type: string
+    enfants_burkina:
+      type: string
+    personnes_cas_urgence:
+      type: string
+    date_immat:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+    groupe_sanguin_id:
+      type: integer
+    situation_matrimoniale_id:
+      type: integer
+    type_piece_id:
+      type: integer
+    personnel_id:
+      type: integer
+  relations:
+    GroupeSanguin:
+      class: GroupeSanguin
+      local: id
+      foreign: fk_immat_gs
+    SituationMatrimoniale:
+      class: SituationMatrimoniale
+      local: id
+      foreign: fk_immat_sm
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_immat_tpid
+    Utilisateur:
+      class: Utilisateur
+      local: id
+      foreign: fk_immat_pers
+      
+
+Archive:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    date:
+      type: date
+    date_lib_1:
+      type: string(255)
+    date_lib_2:
+      type: string(255)
+    description:
+      type: string
+    numero_piece_id:
+      type: string(255)
+      notnull: true
+    document:
+      type: string(255)
+      notnull: true
+    libelle_type_piece:
+      type: string(255)
+    archiviste:
+      type: string(255)
+    document:
+      type: string(255)
+      notnull: true
+    type_piece_id:
+      type: integer
+    personnel_id:
+      type: integer
+  relations:
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_arch_tpid
+    Utilisateur:
+      class: Utilisateur
+      local: id
+      foreign: fk_arch_pers
+      
+           
+Passeport:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    photo:
+      type: string(255)
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    date_naissance:
+      type: date
+      notnull: true
+    lieu_naissance:
+      type: string(255)
+      notnull: true
+    sexe:
+      type: string(255)
+      notnull: true
+    numero_piece:
+      type: string(255)
+      notnull: true
+    domicile:
+      type: string(255)
+    profession:
+      type: string(255)
+    signe_particulier:
+      type: string(255)
+    motif_demande:
+      type: string(255)
+      notnull: true
+    nationalite_origine:
+      type: string(255)
+      notnull: true
+    nationalite_actuelle:
+      type: string(255)
+      notnull: true
+    residence_burkina:
+      type: string(255)
+    pere:
+      type: string(255)
+      notnull: true
+    mere:
+      type: string(255)
+      notnull: true
+    date_depart:
+      type: date
+      notnull: true
+    destination:
+      type: string(255)
+    personnes_cas_urgence:
+      type: string
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+    type_piece_id:
+      type: integer
+  relations:
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_immat_tpid
+      
+      
+Mariage:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    date_mariage:
+      type: date
+      notnull: true
+    heure_mariage:
+      type: string(5)
+      notnull: true
+    lieu_mariage:
+      type: string(255)
+      notnull: true
+    date_demande_mariage:
+      type: date
+      notnull: true
+    nom_epoux:
+      type: string(255)
+      notnull: true
+    prenom_epoux:
+      type: string(255)
+    date_naissance_epoux:
+      type: date
+      notnull: true
+    lieu_naissance_epoux:
+      type: string(255)
+      notnull: true
+    profession_epoux:
+      type: string(255)
+    nationalite_epoux:
+      type: string(255)
+    domicile_epoux:
+      type: string(255)
+    pere_epoux:
+      type: string(255)
+      notnull: true
+    profession_pere_epoux:
+      type: string(255)
+    mere_epoux:
+      type: string(255)
+      notnull: true
+    profession_mere_epoux:
+      type: string(255)
+    domicile_parent_epoux:
+      type: string(255)
+      notnull: true
+    nom_epouse:
+      type: string(255)
+      notnull: true
+    prenom_epouse:
+      type: string(255)
+    date_naissance_epouse:
+      type: date
+      notnull: true
+    lieu_naissance_epouse:
+      type: string(255)
+      notnull: true
+    profession_epouse:
+      type: string(255)
+    nationalite_epouse:
+      type: string(255)
+    domicile_epouse:
+      type: string(255)
+    pere_epouse:
+      type: string(255)
+      notnull: true
+    profession_pere_epouse:
+      type: string(255)
+    mere_epouse:
+      type: string(255)
+      notnull: true
+    profession_mere_epouse:
+      type: string(255)
+    domicile_parent_epouse:
+      type: string
+      notnull: true
+    nom_prenom_temoin_1:
+      type: string(255)
+      notnull: true
+    type_piece_temoin_1:
+      type: integer
+      notnull: true
+    numero_piece_temoin_1:
+      type: string(255)
+      notnull: true
+    date_naissance_temoin_1:
+      type: date
+      notnull: true
+    lieu_naissance_temoin_1:
+      type: string(255)
+      notnull: true
+    profession_temoin_1:
+      type: string(255)
+    domicile_temoin_1:
+      type: string(255)
+    nom_prenom_temoin_2:
+      type: string(255)
+      notnull: true
+    type_piece_temoin_2:
+      type: integer
+      notnull: true
+    numero_piece_temoin_2:
+      type: string(255)
+      notnull: true
+    date_naissance_temoin_2:
+      type: date
+      notnull: true
+    lieu_naissance_temoin_2:
+      type: string(255)
+      notnull: true
+    profession_temoin_2:
+      type: string(255)
+    domicile_temoin_2:
+      type: string(255)
+    epoux_mineurs:
+      type: boolean
+    nom_prenom_mineur:
+      type: string(255)
+    lien_parente_mineur:
+      type: string(255)
+    type_piece_mineur:
+      type: string(255)
+    numero_piece_mineur:
+      type: string(255)
+    validite_piece_mineur:
+      type: date
+    cp:
+      type: string(255)
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+    regime_mariage_id:
+      type: integer
+    forme_mariage_id:
+      type: integer
+    personnel_id:
+      type: integer
+  relations:
+    RegimeMariage:
+      class: RegimeMariage
+      local: id
+      foreign: fk_mar_reg
+    FormeMariage:
+      class: FormeMariage
+      local: id
+      foreign: fk_mar_for
+    Personnel:
+      class: Personnel
+      local: id
+      foreign: fk_mar_per
+      
+DeclarationPerte:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    date_naissance:
+      type: date
+      notnull: true
+    lieu_naissance:
+      type: string(255)
+      notnull: true
+    numero_piece:
+      type: string(255)
+      notnull: true
+    validite_piece:
+      type: date
+      notnull: true
+    domicile:
+      type: string(255)
+    profession:
+      type: string(255)
+    documents:
+      type: string
+    telephone:
+      type: string(255)
+      notnull: true
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+    type_piece_id:
+      type: integer
+  relations:
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_dp_tpid
+      
+      
+AutorisationParentale:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    code:
+      type: string(255)
+      unique: true
+      notnull: true
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    filiation:
+      type: string(255)
+      notnull: true
+    date_naissance:
+      type: date
+      notnull: true
+    lieu_naissance:
+      type: string(255)
+      notnull: true
+    numero_piece:
+      type: string(255)
+      notnull: true
+    validite_piece:
+      type: date
+      notnull: true
+    domicile:
+      type: string(255)
+    enfants:
+      type: string
+    nom_autorise:
+      type: string(255)
+      notnull: true
+    prenom_autorise:
+      type: string(255)
+    date_naissance_autorise:
+      type: date
+      notnull: true
+    lieu_naissance_autorise:
+      type: string(255)
+      notnull: true
+    numero_piece_autorise:
+      type: string(255)
+      notnull: true
+    validite_piece_autorise:
+      type: date
+      notnull: true
+    filiation_autorise:
+      type: string(255)
+      notnull: true
+    destination:
+      type: string(255)
+    telephone:
+      type: string(255)
+      notnull: true
+    date_etablissement:
+      type: date
+      notnull: true
+    est_valide:
+      type: boolean
+    est_delivre:
+      type: boolean
+    date_delivrance:
+      type: date
+    date_peremption:
+      type: date
+    piece_joint_all:
+      type: string(255)
+      notnull: true
+    type_piece_id:
+      type: integer
+    type_piece_id_autorise:
+      type: integer
+  relations:
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_dp_tpid
+      
+      
+Profil:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+      
+Droits:
+  columns:
+    libelle:
+      type: string(255)
+      notnull: true
+
+
+DroitProfil:
+  columns:
+    droit_id:
+      type: integer
+    profil_id:
+      type: integer
+  relations:
+    Droits:
+      class: Droits
+      local: id
+      foreign: fk_dp_droit
+    Profil:
+      class: Profil
+      local: id
+      foreign: fk_dp_profil
+      
+Utilisateur:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    nom:
+      type: string(255)
+      notnull: true
+    prenom:
+      type: string(255)
+    sexe:
+      type: string(255)
+    active:
+      type: string(255)
+      notnull: true
+    login:
+      type: string(255)
+      notnull: true
+    password:
+      type: string(255)
+      notnull: true
+    profil_id:
+      type: integer
+  relations:
+    Profil:
+      class: Profil
+      local: id
+      foreign: fk_utilisateur_profil
+      
+ParametreImpression:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    entete:
+      type: string(255)
+      notnull: true
+    logo:
+      type: string(255)
+      notnull: true
+    pied:
+      type: string(255)
+      notnull: true
+    delaiConnexion:
+      type: integer
+      notnull: true
+      
+Signature:
+  actAs: [Timestampable, SoftDelete]
+  columns:
+    type_piece_id:
+      type: integer
+    personnel_id:
+      type: integer
+  relations:
+    TypePieceIdentite:
+      class: TypePieceIdentite
+      local: id
+      foreign: fk_signature_type
+    Utilisateur:
+      class: Utilisateur
+      local: id
+      foreign: fk_signature_personnel
+      
+SessionTravail:
+  columns:
+    date:
+      type: date
+    old_url:
+      type: string(255)
+    utilisateur_id:
+      type: integer
+  relations:
+    Utilisateur:
+      class: Utilisateur
+      local: id
+      foreign: fk_session_user

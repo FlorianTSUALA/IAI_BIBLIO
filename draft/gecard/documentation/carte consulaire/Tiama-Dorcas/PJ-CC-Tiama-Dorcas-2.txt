@@ -1,0 +1,12 @@
+
+<VirtualHost  *:80>
+ServerName  comptadec.fr
+DocumentRoot  "c:/wamp/www/comptadec.fr"
+SetEnv  APPLICATION_ENV  "development"
+<Directory  "c:/wamp/www/comptadec.fr">
+DirectoryIndex  index.php
+AllowOverride  All
+Order  allow,deny
+Allow  from  all
+</Directory>
+</VirtualHost>

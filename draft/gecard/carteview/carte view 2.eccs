@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<template application="eMedia-Cards CS" version="7.00.1522">
+  <identifier>MjAxNTA5MDMxMzEzMjk2Nzht</identifier>
+  <created>2015-09-03 14:13:29</created>
+  <modified>2018-03-27 13:28:21</modified>
+  <counter value="6" increment="1" format="" />
+  <print count="5" date="2018-03-26 14:19:46" />
+  <defaultPrinter>Microsoft Print to PDF</defaultPrinter>
+  <coolreader>
+    <use-keyboardport>true</use-keyboardport>
+    <use-comport>false</use-comport>
+    <use-contactless>false</use-contactless>
+    <printer-management>ask for printer</printer-management>
+  </coolreader>
+  <database>
+    <engine>odbc</engine>
+    <provider>MSDASQL</provider>
+    <dataSource></dataSource>
+    <initialCatalog></initialCatalog>
+    <userId>root</userId>
+    <password>054595456</password>
+    <noRecordCount>False</noRecordCount>
+    <connectionTimeout>5</connectionTimeout>
+    <commandTimeout>10</commandTimeout>
+    <connectionStringSuffix></connectionStringSuffix>
+    <commandType>Table</commandType>
+    <tableViewName>immatriculation</tableViewName>
+    <commandText></commandText>
+    <cursorType>keyset</cursorType>
+    <cursorLocation>client</cursorLocation>
+    <authorizations add="False" modify="False" delete="False" />
+    <fields>
+      <field>id</field>
+      <field>code</field>
+      <field>matricule</field>
+      <field>photo</field>
+      <field>nom</field>
+      <field>prenom</field>
+      <field>nom_pere</field>
+      <field>prenom_pere</field>
+      <field>nom_mere</field>
+      <field>prenom_mere</field>
+      <field>sexe</field>
+      <field>taille</field>
+      <field>teint</field>
+      <field>date_naissance</field>
+      <field>ville_naissance</field>
+      <field>province_naissance</field>
+      <field>pays_naissance</field>
+      <field>nationalite</field>
+      <field>profession</field>
+      <field>ville_residence_gabon</field>
+      <field>province_residence_gabon</field>
+      <field>adresse_gabon</field>
+      <field>quartier_gabon</field>
+      <field>telephone_gabon</field>
+      <field>adresse_burkina</field>
+      <field>quartier_burkina</field>
+      <field>telephone_burkina</field>
+      <field>date_entree_gabon</field>
+      <field>signalement</field>
+      <field>pays_provenance</field>
+      <field>signes_particuliers</field>
+      <field>numero_piece_id</field>
+      <field>enfants_gabon</field>
+      <field>enfants_burkina</field>
+      <field>personnes_cas_urgence</field>
+      <field>date_immat</field>
+      <field>est_delivre</field>
+      <field>date_delivrance</field>
+      <field>date_peremption</field>
+      <field>piece_joint_all</field>
+      <field>groupe_sanguin_id</field>
+      <field>situation_matrimoniale_id</field>
+      <field>type_piece_id</field>
+      <field>personnel_id</field>
+      <field>created_at</field>
+      <field>updated_at</field>
+      <field>deleted_at</field>
+    </fields>
+    <lockedFields />
+    <sort field="" direction="" />
+  </database>
+  <magnetic-strip>
+    <encoding>JIS Type-II</encoding>
+    <visible>auto</visible>
+    <iso-track-1>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format="">DBField(&quot;matricule&quot;)</encoding-element>
+    </iso-track-1>
+    <iso-track-2>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format=""></encoding-element>
+    </iso-track-2>
+    <iso-track-3>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format=""></encoding-element>
+    </iso-track-3>
+    <jis-track>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format="">DBField(&quot;matricule&quot;)</encoding-element>
+    </jis-track>
+  </magnetic-strip>
+  <smartcard type="external">
+    <encoding>none</encoding>
+    <visible>automatic</visible>
+    <left>8.25</left>
+    <top>15.82</top>
+    <width>13.62</width>
+    <height>10.28</height>
+    <profile>Smart Card Default profile</profile>
+    <content-formula></content-formula>
+  </smartcard>
+  <contactless type="external">
+    <encoding>none</encoding>
+    <profile></profile>
+    <content-formula></content-formula>
+  </contactless>
+  <sides>
+    <side location="Front">
+      <orientation>Landscape</orientation>
+      <visible>False</visible>
+      <zoom>1.42</zoom>
+      <designmodeleft>225</designmodeleft>
+      <designmodetop>131</designmodetop>
+      <designmodewidth>759</designmodewidth>
+      <designmodeheight>530</designmodeheight>
+      <operatingmodeleft>723</operatingmodeleft>
+      <operatingmodetop>419</operatingmodetop>
+      <background color="white" storeas="none" picture="" mode="Printed" />
+      <grid type="dots" size="1" align="True" color="#C1C1C1" opacity="25" />
+    </side>
+    <side location="Back">
+      <orientation>Landscape</orientation>
+      <visible>True</visible>
+      <zoom>1.42</zoom>
+      <designmodeleft>249</designmodeleft>
+      <designmodetop>205</designmodetop>
+      <designmodewidth>759</designmodewidth>
+      <designmodeheight>530</designmodeheight>
+      <operatingmodeleft>249</operatingmodeleft>
+      <operatingmodetop>205</operatingmodetop>
+      <background color="white" storeas="none" picture="" mode="Printed" />
+      <grid type="dots" size="1" align="False" color="#C1C1C1" opacity="16" />
+    </side>
+  </sides>
+  <objects location="front">
+    <object type="Picture" name="Image6">
+      <layer>1</layer>
+      <left unit="iPos" depth="49">213</left>
+      <top unit="iPos" depth="21">773</top>
+      <width unit="iPos" depth="57">609.04</width>
+      <height unit="iPos" depth="59">38</height>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\téléchargement.png</picture>
+      <zoom level="273.35433" />
+      <caption-order>5</caption-order>
+    </object>
+    <object type="Text" Name="Texte2">
+      <layer>2</layer>
+      <left unit="iPos" depth="7">704.1</left>
+      <top unit="iPos" depth="59">78.81</top>
+      <width unit="iPos" depth="40">84.08</width>
+      <content-fixed>N°</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>20</caption-order>
+    </object>
+    <object type="Text" Name="Texte5">
+      <layer>3</layer>
+      <left unit="iPos" depth="1">708</left>
+      <top unit="iPos" depth="35">79</top>
+      <width unit="iPos" depth="18">818</width>
+      <content-fixed>AMBASSADE DU BURKINA FASO</content-fixed>
+      <font face="Century Gothic" size="6" bold="True" />
+      <alignment horizontal="Center" />
+      <caption-order>10</caption-order>
+    </object>
+    <object type="Text" Name="Texte1">
+      <layer>4</layer>
+      <left unit="iPos" depth="20">370.42</left>
+      <top unit="iPos" depth="58">65.95</top>
+      <width unit="iPos" depth="18">729.04</width>
+      <content-fixed>CARTE CONSULAIRE</content-fixed>
+      <font face="Century Gothic" size="5" />
+      <alignment horizontal="Center" />
+      <caption-order>11</caption-order>
+    </object>
+    <object type="Text" Name="Texte4">
+      <layer>5</layer>
+      <left unit="iPos" depth="24">612.26</left>
+      <top unit="iPos" depth="31">375.86</top>
+      <width unit="iPos" depth="42">95.55</width>
+      <content-fixed>Nom:</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>12</caption-order>
+    </object>
+    <object type="Text" Name="Texte10">
+      <layer>6</layer>
+      <left unit="iPos" depth="44">714.1</left>
+      <top unit="iPos" depth="55">593.12</top>
+      <width unit="iPos" depth="29">885.55</width>
+      <content-fixed>Né(e) le :</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>13</caption-order>
+    </object>
+    <object type="Text" Name="Texte12">
+      <layer>7</layer>
+      <left unit="iPos" depth="4">415</left>
+      <top unit="iPos" depth="23">680</top>
+      <width unit="iPos" depth="5">882.22</width>
+      <content-fixed>à: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>14</caption-order>
+    </object>
+    <object type="Text" Name="Texte15">
+      <layer>8</layer>
+      <left unit="iPos" depth="26">451.5</left>
+      <top unit="iPos" depth="0">868.2</top>
+      <width unit="iPos" depth="13">668.88</width>
+      <content-fixed>Profession: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>15</caption-order>
+    </object>
+    <object type="Text" Name="Texte8">
+      <layer>9</layer>
+      <left unit="iPos" depth="45">268.77</left>
+      <top unit="iPos" depth="25">393.18</top>
+      <width unit="iPos" depth="4">404.3</width>
+      <content-fixed>Prénom:</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>16</caption-order>
+    </object>
+    <object type="Text" Name="Texte23">
+      <layer>10</layer>
+      <left unit="iPos" depth="25">791</left>
+      <top unit="iPos" depth="43">447</top>
+      <width unit="iPos" depth="29">885.55</width>
+      <content-fixed>Validité</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>17</caption-order>
+    </object>
+    <object type="Text" Name="Texte17">
+      <layer>11</layer>
+      <left unit="iPos" depth="21">734.51</left>
+      <top unit="iPos" depth="31">164.37</top>
+      <width unit="iPos" depth="37">991.11</width>
+      <content-fixed>Fils/Fille de: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>18</caption-order>
+    </object>
+    <object type="Text" Name="Texte20">
+      <layer>12</layer>
+      <left unit="iPos" depth="6">758.5</left>
+      <top unit="iPos" depth="25">528.25</top>
+      <width unit="iPos" depth="46">996.66</width>
+      <content-fixed>et de: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>19</caption-order>
+    </object>
+    <object type="Picture" name="Image2">
+      <layer>13</layer>
+      <left unit="iPos" depth="22">571</left>
+      <width unit="iPos" depth="26">445</width>
+      <height unit="iPos" depth="49">221</height>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\logo.png</picture>
+      <zoom auto="False" level="82.42" />
+      <caption-order>9</caption-order>
+      <opacity>75</opacity>
+    </object>
+    <object type="Barcode" Name="CodeBarre1">
+      <layer>14</layer>
+      <top unit="iPos" depth="45">951</top>
+      <width unit="iPos" depth="37">927</width>
+      <height unit="iPos" depth="37">42</height>
+      <source>Database field</source>
+      <content-fixed>CodeBarre1</content-fixed>
+      <content-dbfield>matricule</content-dbfield>
+      <style>3 of 9 Checksum</style>
+      <font face="Century Gothic" size="5" bold="True" />
+      <caption-order>8</caption-order>
+    </object>
+    <object type="Picture" name="Image1">
+      <layer>15</layer>
+      <left unit="iPos" depth="29">6</left>
+      <top unit="iPos" depth="11">31</top>
+      <width unit="iPos" depth="28">627.8</width>
+      <height unit="iPos" depth="59">435.9</height>
+      <source>Database field</source>
+      <store-as>dbpath</store-as>
+      <content-dbfield>photo</content-dbfield>
+      <picture>C:\Program Files (x86)\eMedia-Cards CS\Skins\Evolis\Other\Default picture.png</picture>
+      <zoom level="1" />
+      <caption-order>4</caption-order>
+      <background color="#CFCFCF" opacity="13" />
+    </object>
+    <object type="Text" Name="Texte3">
+      <layer>16</layer>
+      <left unit="iPos" depth="59">371</left>
+      <top unit="iPos" depth="12">902</top>
+      <width unit="iPos" depth="2">282</width>
+      <content-fixed>Lieu de résidence</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>2</caption-order>
+    </object>
+    <object type="Text" Name="Texte7">
+      <layer>17</layer>
+      <left unit="iPos" depth="0">244</left>
+      <top unit="iPos" depth="50">579</top>
+      <width unit="iPos" depth="26">97</width>
+      <content-fixed>Sexe: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>3</caption-order>
+    </object>
+    <object type="Picture" name="Image3">
+      <layer>18</layer>
+      <left unit="iPos" depth="26">741</left>
+      <top unit="iPos" depth="36">766</top>
+      <width unit="iPos" depth="5">816.4</width>
+      <height unit="iPos" depth="6">380.8</height>
+      <source>User</source>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\logo.png</picture>
+      <zoom auto="False" level="148.35001" />
+      <caption-order>1</caption-order>
+      <opacity>15</opacity>
+      <file-naming type="automatic" />
+    </object>
+  </objects>
+  <objects location="back">
+    <object type="Text" Name="Texte26">
+      <layer>1</layer>
+      <left unit="iPos" depth="20">54.41</left>
+      <top unit="iPos" depth="45">229.3</top>
+      <width unit="iPos" depth="21">657.64</width>
+      <height unit="iPos" depth="28">925.23</height>
+      <content-fixed>L&#39;arrestation, l&#39;incarsération ou toute autre forme de détention du tituaire de la présente carte doit être communiquée, sans retard, à l&#39;ambassade du Burkina Faso à Libreville
+La transmission de toute communication qui lui est adressée ou qui emmane de lui doit être favorable </content-fixed>
+      <font face="Century Gothic" size="8" />
+      <alignment horizontal="Center" />
+      <caption-order>7</caption-order>
+      <multiline>True</multiline>
+    </object>
+    <object type="Text" Name="Texte19">
+      <layer>2</layer>
+      <left unit="iPos" depth="2">43.85</left>
+      <top unit="iPos" depth="35">46.13</top>
+      <width unit="iPos" depth="20">174.13</width>
+      <height unit="iPos" depth="16">19.55</height>
+      <content-fixed>Conformément à la disposition de Vienne de 1963 art. 36 al. b</content-fixed>
+      <font face="Century Gothic" size="8" bold="True" />
+      <alignment horizontal="Center" />
+      <caption-order>6</caption-order>
+      <multiline>True</multiline>
+    </object>
+  </objects>
+</template>

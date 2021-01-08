@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<template application="eMedia-Cards CS" version="7.00.1522">
+  <identifier>MjAxNTA5MDMxMzEzMjk2Nzht</identifier>
+  <created>2015-09-03 14:13:29</created>
+  <modified>2016-07-12 11:49:35</modified>
+  <counter value="2" increment="1" format="" />
+  <print count="1" date="2015-09-03 15:22:50" />
+  <defaultPrinter>Microsoft Print to PDF</defaultPrinter>
+  <coolreader>
+    <use-keyboardport>true</use-keyboardport>
+    <use-comport>false</use-comport>
+    <use-contactless>false</use-contactless>
+    <printer-management>ask for printer</printer-management>
+  </coolreader>
+  <database>
+    <engine>odbc</engine>
+    <provider>MSDASQL</provider>
+    <dataSource>DSN=Consulat DB;</dataSource>
+    <initialCatalog></initialCatalog>
+    <userId>root</userId>
+    <password>054595456</password>
+    <noRecordCount>False</noRecordCount>
+    <connectionTimeout>5</connectionTimeout>
+    <commandTimeout>10</commandTimeout>
+    <connectionStringSuffix></connectionStringSuffix>
+    <commandType>Table</commandType>
+    <tableViewName>immatriculation</tableViewName>
+    <commandText></commandText>
+    <cursorType>keyset</cursorType>
+    <cursorLocation>client</cursorLocation>
+    <authorizations add="False" modify="False" delete="False" />
+    <fields>
+      <field>id</field>
+      <field>code</field>
+      <field>matricule</field>
+      <field>photo</field>
+      <field>nom</field>
+      <field>prenom</field>
+      <field>nom_pere</field>
+      <field>prenom_pere</field>
+      <field>nom_mere</field>
+      <field>prenom_mere</field>
+      <field>sexe</field>
+      <field>taille</field>
+      <field>teint</field>
+      <field>date_naissance</field>
+      <field>ville_naissance</field>
+      <field>province_naissance</field>
+      <field>pays_naissance</field>
+      <field>nationalite</field>
+      <field>profession</field>
+      <field>ville_residence_gabon</field>
+      <field>province_residence_gabon</field>
+      <field>adresse_gabon</field>
+      <field>quartier_gabon</field>
+      <field>telephone_gabon</field>
+      <field>adresse_burkina</field>
+      <field>quartier_burkina</field>
+      <field>telephone_burkina</field>
+      <field>date_entree_gabon</field>
+      <field>signalement</field>
+      <field>pays_provenance</field>
+      <field>signes_particuliers</field>
+      <field>numero_piece_id</field>
+      <field>enfants_gabon</field>
+      <field>enfants_burkina</field>
+      <field>personnes_cas_urgence</field>
+      <field>date_immat</field>
+      <field>est_delivre</field>
+      <field>date_delivrance</field>
+      <field>date_peremption</field>
+      <field>piece_joint_all</field>
+      <field>groupe_sanguin_id</field>
+      <field>situation_matrimoniale_id</field>
+      <field>type_piece_id</field>
+      <field>personnel_id</field>
+      <field>created_at</field>
+      <field>updated_at</field>
+      <field>deleted_at</field>
+    </fields>
+    <lockedFields />
+    <sort field="" direction="" />
+  </database>
+  <magnetic-strip>
+    <encoding>JIS Type-II</encoding>
+    <visible>auto</visible>
+    <iso-track-1>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format="">DBField(&quot;matricule&quot;)</encoding-element>
+    </iso-track-1>
+    <iso-track-2>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format=""></encoding-element>
+    </iso-track-2>
+    <iso-track-3>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format=""></encoding-element>
+    </iso-track-3>
+    <jis-track>
+      <encoding-element name="Formule" kind="formula" length="any" size="0" alignment="left" format="">DBField(&quot;matricule&quot;)</encoding-element>
+    </jis-track>
+  </magnetic-strip>
+  <smartcard type="external">
+    <encoding>none</encoding>
+    <visible>automatic</visible>
+    <left>8.25</left>
+    <top>15.82</top>
+    <width>13.62</width>
+    <height>10.28</height>
+    <profile>Smart Card Default profile</profile>
+    <content-formula></content-formula>
+  </smartcard>
+  <contactless type="external">
+    <encoding>none</encoding>
+    <profile></profile>
+    <content-formula></content-formula>
+  </contactless>
+  <sides>
+    <side location="Front">
+      <orientation>Landscape</orientation>
+      <visible>True</visible>
+      <zoom>1.42</zoom>
+      <designmodeleft>225</designmodeleft>
+      <designmodetop>131</designmodetop>
+      <designmodewidth>759</designmodewidth>
+      <designmodeheight>530</designmodeheight>
+      <operatingmodeleft>187</operatingmodeleft>
+      <operatingmodetop>186</operatingmodetop>
+      <background color="white" storeas="none" picture="" mode="Printed" />
+      <grid type="dots" size="1" align="True" color="#C1C1C1" opacity="25" />
+    </side>
+    <side location="Back">
+      <orientation>Landscape</orientation>
+      <visible>False</visible>
+      <zoom>1.25</zoom>
+      <designmodeleft>249</designmodeleft>
+      <designmodetop>205</designmodetop>
+      <designmodewidth>759</designmodewidth>
+      <designmodeheight>530</designmodeheight>
+      <operatingmodeleft>249</operatingmodeleft>
+      <operatingmodetop>205</operatingmodetop>
+      <background color="white" storeas="none" picture="" mode="Printed" />
+      <grid type="dots" size="1" align="False" color="#C1C1C1" opacity="16" />
+    </side>
+  </sides>
+  <objects location="front">
+    <object type="Picture" name="Image6">
+      <layer>1</layer>
+      <left unit="iPos" depth="42">321</left>
+      <top unit="iPos" depth="45">331</top>
+      <width unit="iPos" depth="41">602.07</width>
+      <height unit="iPos" depth="41">56</height>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\téléchargement.png</picture>
+      <zoom level="273.35433" />
+      <caption-order>2</caption-order>
+      <file-naming type="automatic" />
+    </object>
+    <object type="Text" Name="Texte2">
+      <layer>2</layer>
+      <left unit="iPos" depth="23">509.2</left>
+      <top unit="iPos" depth="31">17.76</top>
+      <width unit="iPos" depth="7">62.06</width>
+      <content-fixed>N°</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>28</caption-order>
+    </object>
+    <object type="Text" Name="Texte5">
+      <layer>3</layer>
+      <left unit="iPos" depth="2">704</left>
+      <top unit="iPos" depth="28">62</top>
+      <width unit="iPos" depth="57">868</width>
+      <content-fixed>AMBASSADE DU BURKINA FASO</content-fixed>
+      <font face="Century Gothic" size="6" bold="True" />
+      <caption-order>8</caption-order>
+    </object>
+    <object type="Text" Name="Texte1">
+      <layer>4</layer>
+      <left unit="iPos" depth="15">320.86</left>
+      <top unit="iPos" depth="31">59.49</top>
+      <width unit="iPos" depth="55">426.01</width>
+      <content-fixed>BP 7763 Libreville Gabon</content-fixed>
+      <font face="Century Gothic" size="5" />
+      <caption-order>9</caption-order>
+    </object>
+    <object type="Text" Name="Texte3">
+      <layer>5</layer>
+      <left unit="iPos" depth="4">872</left>
+      <top unit="iPos" depth="25">31</top>
+      <width unit="iPos" depth="21">595.56</width>
+      <content-fixed>Tel: +241 0120 14 95 - 01 44 11 48</content-fixed>
+      <font face="Century Gothic" size="5" />
+      <caption-order>10</caption-order>
+    </object>
+    <object type="Text" Name="Texte4">
+      <layer>6</layer>
+      <left unit="iPos" depth="14">687.76</left>
+      <top unit="iPos" depth="47">683.41</top>
+      <width unit="iPos" depth="59">53.33</width>
+      <content-fixed>Nom:</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>11</caption-order>
+    </object>
+    <object type="Text" Name="Texte10">
+      <layer>7</layer>
+      <left unit="iPos" depth="46">716.1</left>
+      <top unit="iPos" depth="19">964.82</top>
+      <width unit="iPos" depth="16">551.11</width>
+      <content-fixed>Né(e) le :</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>12</caption-order>
+    </object>
+    <object type="Text" Name="Texte12">
+      <layer>8</layer>
+      <left unit="iPos" depth="50">415</left>
+      <top unit="iPos" depth="20">530</top>
+      <width unit="iPos" depth="48">227.77</width>
+      <content-fixed>à: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>13</caption-order>
+    </object>
+    <object type="Text" Name="Texte15">
+      <layer>9</layer>
+      <left unit="iPos" depth="48">237.3</left>
+      <top unit="iPos" depth="33">686.2</top>
+      <width unit="iPos" depth="0">996.66</width>
+      <content-fixed>Profession: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>14</caption-order>
+    </object>
+    <object type="Text" Name="Texte23">
+      <layer>10</layer>
+      <left unit="iPos" depth="35">212.04</left>
+      <top unit="iPos" depth="5">505.99</top>
+      <width unit="iPos" depth="4">776.66</width>
+      <content-fixed>Validité</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>15</caption-order>
+    </object>
+    <object type="Text" Name="Texte8">
+      <layer>11</layer>
+      <left unit="iPos" depth="9">857.11</left>
+      <top unit="iPos" depth="44">292.74</top>
+      <width unit="iPos" depth="13">808.4</width>
+      <content-fixed>Prénom:</content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>16</caption-order>
+    </object>
+    <object type="Text" Name="Texte17">
+      <layer>12</layer>
+      <left unit="iPos" depth="30">719.84</left>
+      <top unit="iPos" depth="27">967.42</top>
+      <width unit="iPos" depth="4">776.66</width>
+      <content-fixed>Fils/Fille de: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>18</caption-order>
+    </object>
+    <object type="Text" Name="Texte6">
+      <layer>13</layer>
+      <left unit="iPos" depth="33">684</left>
+      <top unit="iPos" depth="11">61</top>
+      <width unit="iPos" depth="27">925.22</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>matricule</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>17</caption-order>
+    </object>
+    <object type="Text" Name="Texte20">
+      <layer>14</layer>
+      <left unit="iPos" depth="39">432.3</left>
+      <top unit="iPos" depth="47">742.47</top>
+      <width unit="iPos" depth="15">885.55</width>
+      <content-fixed>et de: </content-fixed>
+      <font face="Century Gothic" size="7" />
+      <caption-order>19</caption-order>
+    </object>
+    <object type="Text" Name="Texte11">
+      <layer>15</layer>
+      <left unit="iPos" depth="59">723.5</left>
+      <top unit="iPos" depth="24">529.45</top>
+      <width unit="iPos" depth="41">738.82</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>nom</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>20</caption-order>
+    </object>
+    <object type="Text" Name="Texte7">
+      <layer>16</layer>
+      <left unit="iPos" depth="35">972.68</left>
+      <top unit="iPos" depth="54">235.32</top>
+      <width unit="iPos" depth="42">341.73</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>date_naissance</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>21</caption-order>
+    </object>
+    <object type="Text" Name="Texte13">
+      <layer>17</layer>
+      <left unit="iPos" depth="13">179.08</left>
+      <top unit="iPos" depth="38">860.05</top>
+      <width unit="iPos" depth="44">289.62</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>ville_naissance</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>22</caption-order>
+    </object>
+    <object type="Text" Name="Texte16">
+      <layer>18</layer>
+      <left unit="iPos" depth="53">729.92</left>
+      <top unit="iPos" depth="32">366.16</top>
+      <width unit="iPos" depth="38">691.26</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>profession</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>23</caption-order>
+    </object>
+    <object type="Text" Name="Texte18">
+      <layer>19</layer>
+      <left unit="iPos" depth="16">730.48</left>
+      <top unit="iPos" depth="17">701.31</top>
+      <width unit="iPos" depth="51">875.28</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>date_peremption</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>24</caption-order>
+    </object>
+    <object type="Text" Name="Texte14">
+      <layer>20</layer>
+      <left unit="iPos" depth="39">625.8</left>
+      <top unit="iPos" depth="54">603.1</top>
+      <width unit="iPos" depth="55">435.84</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>pays_naissance</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>25</caption-order>
+    </object>
+    <object type="Text" Name="Texte9">
+      <layer>21</layer>
+      <left unit="iPos" depth="57">829.67</left>
+      <top unit="iPos" depth="29">863.55</top>
+      <width unit="iPos" depth="9">639.97</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>prenom</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>26</caption-order>
+    </object>
+    <object type="Picture" name="Image2">
+      <layer>22</layer>
+      <left unit="iPos" depth="0">376</left>
+      <width unit="iPos" depth="35">221</width>
+      <height unit="iPos" depth="34">993</height>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\logo.png</picture>
+      <zoom auto="False" level="82.42" />
+      <caption-order>7</caption-order>
+      <opacity>75</opacity>
+      <file-naming type="automatic" />
+    </object>
+    <object type="Text" Name="Texte24">
+      <layer>23</layer>
+      <left unit="iPos" depth="17">199.24</left>
+      <top unit="iPos" depth="33">677.33</top>
+      <width unit="iPos" depth="10">629.56</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>nom_pere</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>27</caption-order>
+    </object>
+    <object type="Barcode" Name="CodeBarre1">
+      <layer>24</layer>
+      <top unit="iPos" depth="59">783</top>
+      <width unit="iPos" depth="15">874</width>
+      <height unit="iPos" depth="51">75</height>
+      <source>Database field</source>
+      <content-fixed>CodeBarre1</content-fixed>
+      <content-dbfield>matricule</content-dbfield>
+      <style>3 of 9 Checksum</style>
+      <font face="Century Gothic" size="5" bold="True" />
+      <caption-order>6</caption-order>
+    </object>
+    <object type="Text" Name="Texte25">
+      <layer>25</layer>
+      <left unit="iPos" depth="7">517.42</left>
+      <top unit="iPos" depth="32">388.22</top>
+      <width unit="iPos" depth="16">523.15</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>prenom_pere</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>29</caption-order>
+    </object>
+    <object type="Text" Name="Texte21">
+      <layer>26</layer>
+      <left unit="iPos" depth="58">622.35</left>
+      <top unit="iPos" depth="53">753.82</top>
+      <width unit="iPos" depth="42">341.73</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>nom_mere</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>30</caption-order>
+    </object>
+    <object type="Picture" name="Image5">
+      <layer>27</layer>
+      <left unit="iPos" depth="32">97</left>
+      <top unit="iPos" depth="39">204</top>
+      <width unit="iPos" depth="17">365</width>
+      <height unit="iPos" depth="22">29.89</height>
+      <locked>True</locked>
+      <image-source>Signature</image-source>
+      <store-as>file</store-as>
+      <picture>C:\wamp\www\gesddic.org\carte view\signa.png</picture>
+      <zoom level="104.26721" />
+      <caption-order>4</caption-order>
+      <file-naming type="automatic" />
+    </object>
+    <object type="Text" Name="Texte22">
+      <layer>28</layer>
+      <left unit="iPos" depth="23">819.56</left>
+      <top unit="iPos" depth="54">654.93</top>
+      <width unit="iPos" depth="24">534.25</width>
+      <source>Database field</source>
+      <content-fixed>Texte4</content-fixed>
+      <content-dbfield>prenom_mere</content-dbfield>
+      <font face="Century Gothic" size="7" bold="True" />
+      <caption-order>31</caption-order>
+    </object>
+    <object type="Picture" name="Image1">
+      <layer>29</layer>
+      <left unit="iPos" depth="23">6</left>
+      <top unit="iPos" depth="52">71</top>
+      <width unit="iPos" depth="52">746.5</width>
+      <height unit="iPos" depth="28">469.8</height>
+      <source>Database field</source>
+      <store-as>dbpath</store-as>
+      <content-dbfield>photo</content-dbfield>
+      <picture>C:\Program Files (x86)\eMedia-Cards CS\Skins\Evolis\Other\Default picture.png</picture>
+      <zoom level="1.#INF" />
+      <caption-order>1</caption-order>
+      <background color="#CFCFCF" opacity="13" />
+      <file-naming type="automatic" />
+    </object>
+  </objects>
+  <objects location="back">
+    <object type="Text" Name="Texte26">
+      <layer>1</layer>
+      <left unit="iPos" depth="59">86.61</left>
+      <top unit="iPos" depth="0">998.4</top>
+      <width unit="iPos" depth="53">894.87</width>
+      <height unit="iPos" depth="22">548.49</height>
+      <content-fixed>L&#39;arrestation, l&#39;incarsération ou toute autre forme de détention du tituaire de la présente carte doit être communiquée, sans retard, au Consulat Général du Burkina Faso à Libreville, sis près de la Mairie du Haut de Gué-Gué à Libreville.
+La transmission de toute communication qui lui est adressée ou qui emmane de lui doit être favorable </content-fixed>
+      <font face="Century Gothic" size="8" />
+      <alignment horizontal="Center" />
+      <caption-order>5</caption-order>
+      <multiline>True</multiline>
+    </object>
+    <object type="Text" Name="Texte19">
+      <layer>2</layer>
+      <left unit="iPos" depth="48">43.85</left>
+      <top unit="iPos" depth="17">98.74</top>
+      <width unit="iPos" depth="8">459.48</width>
+      <height unit="iPos" depth="35">67.33</height>
+      <content-fixed>Conformément à la disposition de Vienne de 1963 art. 36 al. b</content-fixed>
+      <font face="Century Gothic" size="8" bold="True" />
+      <alignment horizontal="Center" />
+      <caption-order>3</caption-order>
+      <multiline>True</multiline>
+    </object>
+  </objects>
+</template>
