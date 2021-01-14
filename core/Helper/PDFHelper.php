@@ -1,6 +1,6 @@
 <?php
 
-include('../../lib/pdfparser/vendor/autoload.php');
+include('lib/pdfparser/vendor/autoload.php');
 
 
 class PDFHelper{

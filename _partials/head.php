@@ -1,3 +1,6 @@
+
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,11 +29,13 @@
 
     require_once("core/Helper/DBHelper.php");
     require_once("core/Helper/RequestHelper.php");
-    //require_once("core/Helper/PDFHelper.php");
 
     require_once('config/config.php');
     require_once('core/URL.php');
     require_once( "core/DateUtils.php");
-    require_once( "core/service/RouterService.php")
+    require_once( "core/service/RouterService.php");
+    require_once( "core/service/UtilisateurService.php");
+    require_once( "core/service/CycleService.php");
+    require_once( "core/service/EnseignantService.php");
+    require_once( "core/service/DocumentService.php");
 ?>
-<?php  ?>

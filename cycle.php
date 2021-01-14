@@ -1,24 +1,30 @@
 <?php
 
-    require_once("core/service/CycleService.php");
-    
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
+    require_once('core/Redirector.php');        
+    require_once('core/URL.php');
+    require_once('core/service/UtilisateurService.php');
+    require_once('core/service/CycleService.php');
+    require_once('core/URL.php');
 
-    if(isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == "ON"){
+
+
+    if(isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON'){
         $cycles = CycleService::sort($_COOKIE['critere'], $_COOKIE['parametre']);
     }else{
         $cycles = CycleService::getAll();
     }
     
+    $model = 'cycle';
+    $link = URL::link($model); 
+    $page = $model;
  ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang='fr'>
 
 <head>
-    <?php include "_partials/head.php" ?>
-
+    
+    <?php include '_partials/head.php' ?>
     <style>
         .filter-main .left .item {
             -webkit-box-align: center;
@@ -27,13 +33,29 @@
             margin-right: 10px;
             margin-bottom: 10px;
         }
-    </style>
 
-    <title> <?= $title??'Cycles - IAI Bibliotheque';?> </title>
+        .modal.loading .modal-content:before {
+            content: 'Loading...';
+            text-align: center;
+            line-height: 155px;
+            font-size: 20px;
+            background: rgba(0, 0, 0, .8);
+            position: absolute;
+            top: 55px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #EEE;
+            z-index: 1000;
+        }
+    </style>
+  
+
+    <title> <?= $title??ucfirst($model).'s - IAI Bibliotheque';?> </title>
 </head>
 
 <body>
-<div >
+
     <!-- ==========Preloader========== -->
     <?php include "_partials/preloader.php" ?>
     <!-- ==========Preloader========== -->
@@ -50,14 +72,7 @@
     <!-- ==========Header-Section========== -->
         
     <!-- ==========Crud-Banner-Section========== -->
-        <?php
-
-            $model = "cycle"; 
-            $link = URL::link($model); 
-            
-            include "_partials/crud_banner.php" ;
-
-        ?>
+        <?php include "_partials/crud_banner.php" ; ?>
     <!-- ==========Crud-Banner-Section========== -->
 
     <!-- ==========Event-Section========== -->
@@ -66,8 +81,8 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div id="form" class="checkout-widget checkout-contact mb-5">
-                        <h5 class="title">Ajouter un cycle </h5>
-                        <form id="form-cycle" class="checkout-contact-form" action="<?= URL::link("cycle-controller");?>" method="POST">
+                        <h5 class="title">Ajouter un <?= $model ?> </h5>
+                        <form id="form-$model" class="checkout-contact-form" action="<?= URL::link("$model-controller");?>" method="POST">
                             <div class="form-group">
                                 <input type="text" name="libelle" value="<?= isset($_GET["libelle"])? rawurldecode($_GET["libelle"]) :"" ?>"  title="Veuillez entrer le libelle du cycle" placeholder="Libelle" required>
                             </div>
@@ -80,7 +95,7 @@
                     </div>
                     <div id="liste" class="checkout-widget checkout-contact">
                         <div class="filter-main">
-                            <form id="form-recherche" class="left title" method="POST" action="<?= URL::link("cycle-controller");?>">
+                            <form id="form-recherche" class="left title" method="POST" action="<?= URL::link("$model-controller");?>">
                                 <div class="item"> <h5 class=" " >Liste des cyles</h5> </div>
                                 <div class="item">
                                     <span class="show">Trier par :</span>
@@ -130,7 +145,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="item">
-                                                        <a href=<?= URL::link("cycle-controller")."?id={$cycle['id']};"; ?> onclick="return confirm('Voulez-vous Supprimer cette ligne ?');" >
+                                                        <a href="#" data-record-id="<?= $cycle['id'] ?>" data-record-title="<?= $cycle['libelle'] ?>" data-toggle="modal" data-target="#confirm-delete">
                                                             <i class="fas fa-trash"  title="supprimer"></i><span></span>
                                                         </a>
                                                     </div>
@@ -143,7 +158,7 @@
                                         
                                 <?php  }else{  ?>
                                         <div class="load-more text-center" style="background: #032055;">
-                                            <a href="#0" class="custom-button transparent">Auncun cycle enregistré</a>
+                                            <a href="#0" class="custom-button transparent">Auncun <?= $model ?> enregistré</a>
                                         </div>
                                 <?php } ?>
                              
@@ -172,46 +187,22 @@
     <!-- ==========Footer-Section========== -->
     <?php include "_partials/footer.php" ?>
     <!-- ==========Footer-Section========== -->
-</div>
+
+
+    <!-- ==========Modal-Section========== http://plnkr.co/edit/IoBvHwW6pr4Msa5u -->
+    <?php include "_partials/crud-modal-delete.php" ?>
+    <!-- ==========Modal-Section========== -->
+    
     <?php include "_partials/javascript.php" ?>
-   
+
+    <?php include "_partials/crud-modal-delete-script.php" ?>
+    <?php include "_partials/anchor-script.php" ?>
+                                
     <script>
-
-        
-
-        $(document).on('click', 'a[href^="#"]', function(event) {
-            window.setTimeout(function() {
-                offset_anchor($(".header-section").outerHeight() + 30);
-            }, 500);
-        });
-
-        // Set the offset when entering page with hash present in the url
-        $(document).ready(function(){
-            if (location.hash.length !== 0) {
-                scroll_to(window.location.hash)
-            }
-        })
-
         function goto(id, libelle){
-            window.location.href = "cycle.php?id="+id+"&libelle="+ libelle +"#form"
+            window.location.href = "<?= URL::link($model) ?>?id="+id+"&libelle="+ libelle +"#form"
         }
-
-        function scroll_to(item) {
-            if($(item).offset() !== undefined){
-                $('html, body').animate({
-                    scrollTop: $(item).offset().top - $(".header-section").outerHeight() - 30
-                }, 500);
-            }
-        }
-        
-        function offset_anchor(offset) {
-            if (location.hash.length !== 0) {
-                window.scrollTo(window.scrollX, window.scrollY - offset);
-            }
-        }
-        
     </script>
-
 </body>
 
 </html>

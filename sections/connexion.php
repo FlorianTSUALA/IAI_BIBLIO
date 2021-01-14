@@ -1,25 +1,14 @@
 <?php
 
+    require_once 'core/service/UtilisateurService.php';
+
     if(isset($_POST['connexion'])){
-        
         $login = RequestHelper::post('login');
-        $password = hash('sha256', RequestHelper::post('password'));
-        
-
-        $sql = "select count(*) from utilisateur where login=:login and password=:password;";
-        $req = DBHelper::connexion()->prepare($sql);
-        
-        $req->bindParam(":login", $login);
-        $req->bindParam(":password", $password);
-        
-        $req->execute();
-        $result = $req->fectch();
-
-        if($result == 1){
-            header('location: '.URL::link("accueil"));
-        }else{
-            $msg = "nom d'utilisateur ou mot de passe inconnu";
-        }
+        $password = RequestHelper::post('password');
+        var_dump($login, $password);
+        // die();
+        $password =  RequestHelper::passwordEncode($password);
+        UtilisateurService::connexion($login, $password);
     }
 
 ?>
@@ -28,18 +17,22 @@
     <div class="container">
         <div class="padding-top padding-bottom">
             <div class="account-area">
+                
                 <div class="section-header-3">
-                    <span class="cate">Salut</span>
+                    <a href="<?= URL::link('accueil') ?>"><span class="cate">Acceuil</span></a>
                     <h4 class="subtitle">Bienvenue à Biblio IAI</h4>
                 </div>
-                <form class="account-form " method="POST" action="/iai_biblio/">
+   
+                <?php if(isset($_GET['message'])) echo '<div style="color: #f1481f; text-align: center; font-weight: bold;" class="alert">Mot de passe ou login incorrect</div>' ?>
+   
+                <form class="account-form " method="POST" action="<?= URL::link('connexion') ?>" autocomplete="off">
                     <div class="form-group">
                         <label for="login">Login<span>*</span></label>
-                        <input type="text" placeholder="Entrer votre login" value="" id="login" required>
+                        <input type="text" placeholder="Entrer votre login" value="" name="login" id="login" required  autocomplete="nope">
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe<span>*</span></label>
-                        <input type="password" placeholder="mot de passe" value="" id="password" required>
+                        <input type="password" placeholder="mot de passe" value="" name="password" id="password" required  autocomplete="new-password">
                     </div>
                    <!--  <div class="form-group checkgroup" disable>
                         <input type="checkbox" id="bal2" required checked>
@@ -47,11 +40,11 @@
                         <a href="#0" class="forget-pass">Mot de passe oublié</a>
                     </div> -->
                     <div class="form-group text-center">
-                        <input type="submit" value="Se connecter">
+                        <input type="submit" name="connexion" value="Se connecter">
                     </div>
                 </form>
                 <div class="option">
-                    J'ai pas de compte? <a href="sign-up.html">Creer un compte</a>
+                    J'ai pas de compte? <a >Creer un compte</a>
                 </div>
                 <!-- <div class="or"><span>Or</span></div>
                 <ul class="social-icons">

@@ -12,5 +12,7 @@ define('ROOT_URL', '/IAI_BIBLIO/');
 
 define('BASE_URL', 'http://localhost/IAI_BIBLIO/');
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 ?>

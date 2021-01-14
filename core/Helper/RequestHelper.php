@@ -18,4 +18,19 @@ class RequestHelper{
     }
 
 
+    
+    public static function passwordEncode($password){
+        return hash('sha256', $password);
+    }
+    
+    
+    public static function encodeUrlParam($param){
+        return rawurlencode($param);
+    }
+    
+    public static function decodeUrlParam($param){
+        return rawurldecode($param);
+    }
+
+
 }

@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php  $page = "apropos" 
+    ?>
+    
+    <!DOCTYPE html>
 <html lang="fr">
 
 
@@ -16,10 +19,7 @@
     <!-- ==========Preloader========== -->
     
     <!-- ==========Overlay========== -->
-    <?php if($hasOverLay??false){
-                include "_partials/overlay.php";
-            } 
-    ?>
+    <?php if($hasOverLay??true) include "_partials/overlay.php"; ?>
     <!-- ==========Overlay========== -->
 
 
@@ -33,15 +33,15 @@
     <section class="main-page-header speaker-banner bg_img" data-background="assets/images/banner/banner07.jpg">
         <div class="container">
             <div class="speaker-banner-content">
-                <h2 class="title">about us</h2>
+                <h2 class="title">Bienvenue chez nous</h2>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="index.html">
-                            Home
+                        <a href="<?= URL::link("accueil");?>">
+                            Acceuil
                         </a>
                     </li>
                     <li>
-                        about us
+                        Qui sommes nous?
                     </li>
                 </ul>
             </div>
@@ -56,13 +56,15 @@
                 <div class="col-lg-6">
                     <div class="event-about-content">
                         <div class="section-header-3 left-style m-0">
-                            <span class="cate">we are Boleto </span>
-                            <h2 class="title">Get to know us</h2>
+                            <span class="cate">Nous sommes Biblio IAI </span>
+                            <h2 class="title">Nous vous permettons de bien et de facillement apprendre</h2>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+                                Nous mettons à votre dispositions des ouvrages qui sont rédigés par nos étudiants en fin de cycles.
                             </p>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor  ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                               Biblio IAI est une bibliothèque de l'institut africaine d'informatique.
+                               Elle rassemble un ensemble de rapports, mémoires soutenus par les étudiants de cet institut. 
+                               Et celà, en vue de vous aider dans l'apprentissage et la rédaction de vos mémoires et rapports de fin d'année.
                             </p>
                             <a href="#0" class="custom-button">book tickets</a>
                         </div>
@@ -85,10 +87,10 @@
                 <div class="col-lg-9 offset-lg-3 bg-two">
                     <div class="philosophy-content">
                         <div class="section-header-3 left-style">
-                            <span class="cate">Take look at</span>
-                            <h2 class="title">Our philosophy</h2>
+                            <span class="cate">Notre</span>
+                            <h2 class="title"> phylosophie:</h2>
                             <p class="ml-0">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmtempor incididunt labore et dolore magna aliqu enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                UNE BIBLIOTHÈQUE EST UN HÔPITAL POUR L'ESPRIT
                             </p>
                         </div>
                         <ul class="phisophy-list">
@@ -96,19 +98,19 @@
                                 <div class="thumb">
                                     <img src="assets/images/philosophy/icon1.png" alt="philosophy">
                                 </div>
-                                <h5 class="title">Honesty & Fairness </h5>
+                                <h5 class="title">Verba volant, scripta manent : « les paroles s’envolent, les écrits restent » </h5>
                             </li>
                             <li>
                                 <div class="thumb">
                                     <img src="assets/images/philosophy/icon2.png" alt="philosophy">
                                 </div>
-                                <h5 class="title">Clarity & Transparency</h5>
+                                <h5 class="title">Habent sua fata libelli : « les livres ont leur propre destin ».</h5>
                             </li>
                             <li>
                                 <div class="thumb">
                                     <img src="assets/images/philosophy/icon3.png" alt="philosophy">
                                 </div>
-                                <h5 class="title">Focus on Customers</h5>
+                                <h5 class="title">Seul le travail paie</h5>
                             </li>
                         </ul>
                     </div>
@@ -124,9 +126,11 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="section-header-3 left-style mb-lg-0">
-                        <span class="cate">quick facts</span>
-                        <h2 class="title">fun facts</h2>
-                        <p>Objectively seize scalable metrics whereas proactive services seamlessly empower fully researched growth strategies</p>
+                        <span class="cate">Apprendre rapidement </span>
+                        <h2 class="title">Apprendre en amusant</h2>
+                        <p>Avec une équipes de spécialistes tels que nos humbles enseignants,nos visiteurs et utilisateurs ne seront decus.
+                            Nous vous offrant des documents par cycles, ce qui permettra une visite complète des débouchées des différents cycles.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-8">
@@ -139,7 +143,7 @@
                                 <h3 class="title odometer" data-odometer-final="30"></h3>
                                 <h3 class="title">M+</h3>
                             </div>
-                            <span class="d-block info">Customers</span>
+                            <span class="d-block info">Enseignants</span>
                         </div>
                         <div class="counter-item">
                             <div class="counter-thumb">
@@ -148,7 +152,7 @@
                             <div class="counter-content">
                                 <h3 class="title odometer" data-odometer-final="11"></h3>
                             </div>
-                            <span class="d-block info">Contries</span>
+                            <span class="d-block info">Utilisateurs</span>
                         </div>
                         <div class="counter-item">
                             <div class="counter-thumb">
@@ -158,7 +162,7 @@
                                 <h3 class="title odometer" data-odometer-final="650"></h3>
                                 <h3 class="title">+</h3>
                             </div>
-                            <span class="d-block info">Towns & Cities</span>
+                            <span class="d-block info">Cycles</span>
                         </div>
                         <div class="counter-item">
                             <div class="counter-thumb">
@@ -168,7 +172,7 @@
                                 <h3 class="title odometer" data-odometer-final="5000"></h3>
                                 <h3 class="title">+</h3>
                             </div>
-                            <span class="d-block info">Screens</span>
+                            <span class="d-block info">Documents</span>
                         </div>
                     </div>
                 </div>
@@ -181,8 +185,8 @@
     <section class="client-section padding-bottom padding-top bg_img" data-background="assets/images/client/client-bg.jpg">
         <div class="container">
             <div class="section-header-3">
-                <span class="cate">testimonials</span>
-                <h2 class="title">the fans have spoken</h2>
+                <span class="cate">Témoignages</span>
+                <h2 class="title">Les fans ont parlé</h2>
             </div>
             <div class="client-slider owl-carousel owl-theme">
                 <div class="client-item">
@@ -191,11 +195,11 @@
                     </div>
                     <div class="client-content">
                         <h5 class="title">
-                            <a href="#0">Rafuz</a>
+                            <a href="#0">Priscile</a>
                         </h5>
-                        <span class="info"><i class="fas fa-check"></i> Verified</span>
+                        <span class="info"><i class="fas fa-check"></i> Etudiante de nationalité Gabonaise</span>
                         <blockquote class="client-quote">
-                            "Great prices and Cheaper than other URLs! Easy to use."
+                            "Cette Bibliothèque est très intéressante et enrichissante. Je vous la recommande."
                         </blockquote>
                     </div>
                 </div>
@@ -250,12 +254,13 @@
     <section class="speaker-section padding-bottom padding-top">
         <div class="container">
             <div class="section-header-3">
-                <span class="cate">meet our most valued</span>
-                <h2 class="title">expert team members</h2>
-                <p>World is committed to making participation in the event a harassment free experience for 
-                everyone, regardless of level of experience, gender, gender identity and expression</p>
+                <span class="cate">Rencontrez nos plus précieux
+                </span>
+                <h2 class="title">MEMBRES DE L'ÉQUIPE D'EXPERTS</h2>
+                <p>Notre équipe s'engage à faire de la participation de chaque personne à cet événement qui est la réalisation de la bibliothèque numérique une expérience unique pour
+                tout le monde, quel que soit son niveau d'expérience, son sexe, son identité de genre et son expression</p>
             </div>
-            <div class="speaker--slider">
+            <!-- <div class="speaker--slider">
                 <div class="speaker-slider owl-carousel owl-theme">
                     <div class="speaker-item">
                         <div class="speaker-thumb">
@@ -266,10 +271,10 @@
                         <div class="speaker-content">
                             <h5 class="title">
                                 <a href="event-speaker.html">
-                                    Gerard Bryan 
+                                   NGO'MINTAMACK Hermine
                                 </a>
                             </h5>
-                            <span>CO-FOUNDER, CEO</span>
+                            <span>CO-fondatrice, étudiante en ing 2</span>
                         </div>
                     </div>
                     <div class="speaker-item">
@@ -281,42 +286,14 @@
                         <div class="speaker-content">
                             <h5 class="title">
                                 <a href="event-speaker.html">
-                                    Raihan Rafuj
+                                    TSUALA Florian
                                 </a>
                             </h5>
-                            <span>CO-FOUNDER, CEO</span>
+                            <span>CO-fondateur, étudiant en ing 2</span>
                         </div>
                     </div>
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="event-speaker.html">
-                                <img src="assets/images/speaker/speaker03.jpg" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="event-speaker.html">
-                                    Bela Bose
-                                </a>
-                            </h5>
-                            <span>CO-FOUNDER, CEO</span>
-                        </div>
-                    </div>
-                    <div class="speaker-item">
-                        <div class="speaker-thumb">
-                            <a href="event-speaker.html">
-                                <img src="assets/images/speaker/speaker04.jpg" alt="speaker">
-                            </a>
-                        </div>
-                        <div class="speaker-content">
-                            <h5 class="title">
-                                <a href="event-speaker.html">
-                                    Grass Hopper
-                                </a>
-                            </h5>
-                            <span>CO-FOUNDER, CEO</span>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
                 <div class="speaker-prev">
                     <i class="flaticon-double-right-arrows-angles"></i>
@@ -324,110 +301,12 @@
                 <div class="speaker-next">
                     <i class="flaticon-double-right-arrows-angles"></i>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- ==========Speaker-Section========== -->
 
-    <!-- ==========Gallery-Section========== -->
-    <section class="gallery-section padding-top padding-bottom bg-one">
-        <div class="container">
-            <div class="section-header-3">
-                <span class="cate">Take a look at our</span>
-                <h2 class="title">A ticket for every fan.</h2>
-                <p>World is committed to making participation in the event a harassment free experience for 
-                    everyone, regardless of level of experience, gender, gender identity and expression</p>
-            </div>
-            <div class="row justify-content-center gallery-wrapper mb-30-none">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery05.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery05.jpg" alt="gallery">
-                        </div>
-                    </div>
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery06.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery06.jpg" alt="gallery">
-                        </div>
-                    </div>
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery07.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery07.jpg" alt="gallery">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-3 order-lg-1">
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery11.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery11.jpg" alt="gallery">
-                        </div>
-                    </div>
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery12.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery12.jpg" alt="gallery">
-                        </div>
-                    </div>
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery13.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery13.jpg" alt="gallery">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="gallery-item two">
-                        <div class="gallery-thumb">
-                            <a href="assets/images/gallery/gallery08.jpg" class="img-pop">
-                                <i class="flaticon-loupe"></i>
-                            </a>
-                            <img src="assets/images/gallery/gallery08.jpg" alt="gallery">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="assets/images/gallery/gallery09.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="assets/images/gallery/gallery09.jpg" alt="gallery">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="gallery-item two">
-                                <div class="gallery-thumb">
-                                    <a href="assets/images/gallery/gallery10.jpg" class="img-pop">
-                                        <i class="flaticon-loupe"></i>
-                                    </a>
-                                    <img src="assets/images/gallery/gallery10.jpg" alt="gallery">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ==========Gallery-Section========== -->
-
+ 
     <!-- ==========Tour-Section========== -->
     <section class="tour-section padding-top padding-bottom">
         <div class="container">

@@ -1,3 +1,21 @@
+<?php
+    
+    require_once('core/Redirector.php');    
+    require_once('core/service/DocumentService.php');
+    require_once('core/service/CycleService.php');
+    require_once('core/service/EnseignantService.php');
+    require_once('core/URL.php');
+
+    $documents = DocumentService::getLast(3);
+
+    $cycles = CycleService::getAll();
+    $superviseurs = EnseignantService::getAll();
+
+    $model = 'document';
+    $link = URL::link($model); 
+    $page = $model;
+    
+ ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,7 +48,6 @@
 
     <title> <?= $title??'IAI Bibliotheque';?> </title>
 
-
 </head>
 
 <body>
@@ -39,10 +56,7 @@
     <!-- ==========Preloader========== -->
     
     <!-- ==========Overlay========== -->
-    <?php if($hasOverLay??false){
-                include "_partials/overlay.php";
-            } 
-    ?>
+    <?php if($hasOverLay??true) include "_partials/overlay.php"; ?>
     <!-- ==========Overlay========== -->
 
 
@@ -67,47 +81,51 @@
                 <div class="col-lg-8">
                     <div class="checkout-widget checkout-card padding-bottom">
                         <h5 class="title">Ajouter un document </h5>
-                        <form id="form-document" class="ticket-search-form payment-card-form" enctype="multipart/form-data" >
+                        <form id="form" class="ticket-search-form payment-card-form"   method="POST" action="<?= URL::link("$model-controller");?>"  enctype="multipart/form-data" >
                             <div class="form-group w-100">
                                 <label for="theme">Theme</label>
-                                <input type="text" id="theme">
+                                <input type="text" id="theme" name="theme" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="structure_accueil">Structure d'accueil</label>
-                                <input type="text" id="structure_accueil">
+                                <input type="text" id="structure_accueil" name="structure_accueil" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="liste_mots_cles"> Liste des mots clés</label>
-                                <input type="text" id="liste_mots_cles" placeholder="saisir un mot puis sur la touche appuyer sur entrer pour l'ajouter" data-role="tagsinput" value="">
+                                <input type="text" id="liste_mots_cles" name="liste_mots_cles" placeholder="saisir un mot puis sur la touche appuyer sur entrer pour l'ajouter" data-role="tagsinput" value="" required>
                                 <div class="right-icon">
                                     <i class="flaticon-tag-button-with-happy-face"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="etudiant"> Etudiant</label>
-                                <input type="text" id="etudiant"  require>
+                                <input type="text" id="etudiant" name="etudiant" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="cycle">Cycle</label>
-                                <select class="select-bar" name="cycle" id="cycle">
-                                    <option value="-----">Choisissez une valeur</option>
-                                    <option value="pro">pro</option>
+                                <select class="select-bar" name="cycle" id="cycle" required>
+                                    <!-- <option value="-----">Choisissez une valeur</option> -->
+                                    <?php foreach($cycles as $cycle){
+                                        echo "<option value='".$cycle["id"]."' >".$cycle["libelle"]."</option>";
+                                    } ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="superviseur">Superviseur</label>
-                                <select class="select-bar" name="superviseur" id="superviseur">
-                                    <option value="-----">Choisissez une valeur</option>
-                                    <option value="pro">pro</option>
+                                <select class="select-bar" name="superviseur" id="superviseur" required>
+                                    <!-- <option value="-----">Choisissez une valeur</option> -->
+                                    <?php foreach($superviseurs as $enseignant){
+                                        echo "<option value='".$enseignant["id"]."' >".$enseignant["nom_prenom"]."</option>";
+                                    } ?>
                                 </select>
                             </div>
                             
@@ -115,22 +133,22 @@
 
                             <div class="form-group">
                                 <label for="note_obtenue">Note obtenue</label>
-                                <input type="number" id="note_obtenue" placeholder="Note obtenu">
+                                <input type="number" id="note_obtenue" name="note_obtenue" placeholder="Note obtenu" >
                             </div>
                             <div class="form-group">
                                 <label for="annee_academ">Année academique</label>
-                                <input type="text" id="annee_academ" pattern="[1-2][0-9]{3}-[1-2][0-9]{3}" title="Veuillez entrer une année scolaire respectant ce motif 2010-2012 valide " placeholder="YYYY-YYYY" required>
+                                <input type="text" id="annee_academ" name="annee_academ" pattern="[1-2][0-9]{3}-[1-2][0-9]{3}" title="Veuillez entrer une année scolaire respectant ce motif 2010-2012 valide " placeholder="YYYY-YYYY" required>
                             </div>
                             
                             <div class="form-group image-upload">
-                                <input type="file" name="fichier" id="file-pdf" class="inputfile inputfile-doc" accept="application/pdf" />
+                                <input type="file" name="fichier" id="file-pdf" class="inputfile inputfile-doc" accept="application/pdf" required/>
                                 <label for="file-pdf">
                                     <?= include "core/icons/pdf.php" ?>
                                     <span>Document&hellip;</span>
                                 </label>
                             </div>
                             <div class="form-group image-upload">
-                                <input type="file" name="img_couv" id="file-img" class="inputfile inputfile-doc" accept="image/*" />
+                                <input type="file" name="img_couv" id="file-img" class="inputfile inputfile-doc" accept="image/*" required/>
                                 <label for="file-img">
                                     <?= include "core/icons/picture.php" ?>
                                     <span>Image Couverture&hellip;</span>
@@ -153,7 +171,7 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="custom-button" value="Enregistrer le document">
+                                <input type="submit" class="custom-button" name="enregistrer" value="Enregistrer le document">
                             </div>
                             <p class="notice">
                                 Tout document enregistré est en accord avec les termes de <a href="#0">termes et de les conditions de droits de propriétés intellectuels</a>
@@ -163,59 +181,65 @@
 
 
 
-                    <div class="article-section padding-bottom">
+                    <div id="list" class="article-section padding-bottom">
                         
                         
                         <div class="section-header-1">
                             <h2 class="title">Recents</h2>
-                            <a class="view-all" href="">Voir tout</a>
+                            <a class="view-all" href="<?= URL::link("document-list") ?>">Voir tout</a>
                         </div>
 
                         <div id="recent_document" class="row mb-30-none justify-content-center">
-                            <div class="col-sm-6 col-lg-4">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="assets/images/movie/movie01.jpg" alt="movie">
-                                        </a>
-                                        <div class="event-date">
-                                            <h6 class="date-title">28</h6>
-                                            <span>Dec</span>
+                            <?php foreach($documents as $document){?>
+                                
+                                <div class="col-sm-6 col-lg-4">
+                                    <div class="movie-grid">
+                                        <div class="movie-thumb c-thumb">
+                                            <a href="<?= URL::link("document-detail")."?id=".$document["id"] ?>">
+                                                <img src="<?= URL::img( $document["img_couv"]) ?>" height="322px" alt="movie">
+                                            </a>
+                                            <div class="event-date">
+                                                <h6 class="date-title">28</h6>
+                                                <span>Dec</span>
+                                            </div>
+                                        </div>
+                                        <div class="movie-content bg-one">
+                                            <h5 class="title m-0">
+                                                <a href="#0">alone</a>
+                                            </h5>
+                                            <ul class="movie-rating-percent">
+                                                <li>
+                                                    <a href="#">
+                                                        <div class="thumb">
+                                                            <img src="assets/images/movie/tomato.png" alt="movie">
+                                                        </div>
+                                                        <span class="content"><?= $document["note_obtenue"]; ?></span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <div class="thumb">
+                                                            <img src="assets/images/movie/tomato.png" alt="movie">
+                                                        </div>
+                                                        <span class="content">88%</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <div class="thumb">
+                                                            <img src="assets/images/movie/tomato.png" alt="movie">
+                                                        </div>
+                                                        <span class="content">88%</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">alone</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <a href="#">
-                                                    <div class="thumb">
-                                                        <img src="assets/images/movie/tomato.png" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="thumb">
-                                                        <img src="assets/images/movie/tomato.png" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <div class="thumb">
-                                                        <img src="assets/images/movie/tomato.png" alt="movie">
-                                                    </div>
-                                                    <span class="content">88%</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
+
+
+                        <?php } ?>
+                            
                             
                         </div>
                     </div>
@@ -246,7 +270,15 @@
     
    
     <?php include "_partials/footer-page.php" ?>
-    <?php include "./document-script.php" ?>
+    <?php include "document-script.php" ?>
+
+        
+    <script>
+        function goto(id, th, departement){
+            window.location.href = "<?= URL::link($model) ?>?id="+id+"&nom_prenom="+ nom_prenom+"&departement="+ departement +"#form"
+        }
+    </script>
+
 </body>
 
 

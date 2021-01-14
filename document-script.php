@@ -4,11 +4,13 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $(id).attr('src', e.target.result);
+                $(id).attr('src', e.target.result)
+                console.log(e.target.result)
             }
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0])
         }
     }
+
 
     $("#file-pdf").change(function(){
         readURL(this, "#pdf-display");
@@ -38,11 +40,6 @@
     // event.item: contains the item
   });
 
-
-
-
-
-
 </script>
 
 
@@ -54,7 +51,6 @@
 			event.preventDefault();
 			ajaxPost();
 		});
-	    
 	    
 		function ajaxPost(){
 	    	
@@ -114,10 +110,10 @@
 <!-- CREATION DES ARTICLES RECENTS -->
 <script type="text/javascript">
     function fetch_last_doc(limit){
-
+        return []
     }
 
-    function build_recent_model_element(list){
+    function build_recent_model_element(list  = []){
         
         html = ''
         for(let i = 0; i<list.length; i++){
@@ -169,7 +165,7 @@
         return html
     }
 
-    $('#recent_document').html(build_recent_model_element(fetch_last_doc(3)))
+    // $('#recent_document').html(build_recent_model_element(fetch_last_doc(3)))
 </script>
 
 <!-- SELECTION DES DOCUMENTS FONCITON DE MOT CLE -->

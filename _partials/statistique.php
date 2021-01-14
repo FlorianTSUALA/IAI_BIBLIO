@@ -1,9 +1,9 @@
 <?php
 
-    require_once("core/service/CycleService.php");
-    require_once("core/service/EnseignantService.php");
-    require_once("core/service/DocumentService.php");
-    require_once("core/service/UtilisateurService.php");
+    require_once('core/service/CycleService.php');
+    require_once('core/service/EnseignantService.php');
+    require_once('core/service/DocumentService.php');
+    require_once('core/service/UtilisateurService.php');
     $total_cycles = CycleService::getCount();
     $total_enseignants = EnseignantService::getCount();
     $total_documents = DocumentService::getCount();
@@ -14,7 +14,7 @@
 
 <div class="widget widget-categories text-center">
     <a href="#liste" class="custom-button" >
-        <span>Voir les cycles</span>
+        <span>Voir les <?= $model ?>s</span>
     </a>
 </div>
 
@@ -23,22 +23,22 @@
     <h5 class="title">Menu des gestions</h5>
     <ul>
         <li>
-            <a href=<?= URL::link("cycle");?> >
+            <a href=<?= URL::link('cycle');?> >
                 <span>Gestion des cycles</span><span>( <?= $total_cycles;?> )</span>
             </a>
         </li>
         <li class="active">
-            <a href=<?= URL::link("utilisateur");?> >
+            <a href=<?= URL::link('utilisateur');?> >
                 <span>Gestion des utilisateurs</span><span>( <?= $total_utilisateurs;?> )</span>
             </a>
         </li>
         <li>
-            <a href=<?= URL::link("enseignant");?> >
+            <a href=<?= URL::link('enseignant');?> >
                 <span>Gestion des enseignants</span><span>( <?= $total_enseignants;?> )</span>
             </a>
         </li>
         <li>
-            <a href=<?= URL::link("Document");?> >
+            <a href=<?= URL::link('document');?> >
                 <span>Gestion des Documents</span><span>( <?= $total_documents;?> )</span>
             </a>
         </li>
@@ -46,7 +46,7 @@
     </ul>
 </div>
 
-
+<!-- 
 <div class="booking-summery bg-one">
 
    
@@ -74,7 +74,7 @@
         </li>
     </ul>
 
-</div>
+</div> 
 
 
 <div class="proceed-area  text-center">
@@ -82,4 +82,4 @@
     <a href="<?= "#0";?>" class="custom-button back-button">proceed</a>
 </div>
 
-
+-->

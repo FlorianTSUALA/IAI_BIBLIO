@@ -17,9 +17,10 @@ class URL{
         $tmp = "";
         switch($name){
             case "document":      $name = "document";   break;
-            case "document-list":     $name = "";   break;
+            case "document-list":     $name = "document-list";   break;
+            case "document-detail":      $name = "consultation";   break;
             case "document-add":      $name = "";   break;
-            case "document-controller":      $name = "cycle-controller";   break;
+            case "document-controller":      $name = "document-controller";   break;
 
             case "cycle":      $name = "cycle";   break;
             case "cycle-list":     $name = "";   break;
@@ -29,21 +30,31 @@ class URL{
             case "enseignant":      $name = "enseignant";   break;
             case "enseignant-list":     $name = "";   break;
             case "enseignant-add":      $name = "";   break;
-            case "enseignant-controller":      $name = "cycle-controller";   break;
+            case "enseignant-controller":      $name = "enseignant-controller";   break;
 
             case "utilisateur":      $name = "utilisateur";   break;
             case "utilisateur-list":     $name = "";   break;
             case "utilisateur-add":      $name = "";   break;
-            case "utilisateur-controller":      $name = "cycle-controller";   break;
+            case "utilisateur-controller":      $name = "utilisateur-controller";   break;
             
             case "contact":       $name = "contact";   break;
             case "apropos":       $name = "apropos";   break;
             case "accueil":       $name = "accueil";   break;
             case "connexion":     $name = "connexion";   break;
+            case "deconnexion":     $name = "deconnexion";   break;
             case "inscription":       $name = "";   break;
             default:      $name = "404";
         }
         return $url.$name.".php";
+    }
+
+
+    public static function img($name){
+        return BASE_URL."media/IMG/".$name;
+    }
+
+    public static function pdf($name){
+        return BASE_URL."media/PDF/".$name;
     }
 
     public static function path(){

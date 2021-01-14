@@ -1,3 +1,23 @@
+<?php
+
+    require_once('core/Redirector.php');    
+    require_once('core/service/UtilisateurService.php');
+    require_once('core/URL.php');
+
+    if(isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON'){
+        if(isset($_GET['mot_cle']) && !empty($_GET['mot_cle']))
+            $utilisateurs = UtilisateurService::sortBy($_GET['critere'], $_GET['parametre'], ['nom_prenom', 'departement'], $_GET['mot_cle']);
+        else
+            $utilisateurs = UtilisateurService::sort($_GET['critere'], $_GET['parametre']);
+    }else{
+        $utilisateurs = UtilisateurService::getAll();
+    }
+    
+    $model = 'utilisateur';
+    $link = URL::link($model); 
+    $page = $model;
+
+ ?>
 
 
 <!DOCTYPE html>
@@ -8,6 +28,31 @@
 
     <?php include "_partials/head.php" ?>
     <title> <?= $title??'Gestion des utilisateurs - IAI Bibliotheque';?> </title>
+
+    <style>
+        .filter-main .left .item {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .modal.loading .modal-content:before {
+            content: 'Loading...';
+            text-align: center;
+            line-height: 155px;
+            font-size: 20px;
+            background: rgba(0, 0, 0, .8);
+            position: absolute;
+            top: 55px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #EEE;
+            z-index: 1000;
+        }
+    </style>
 
 
 </head>
@@ -56,233 +101,62 @@
                         </a>
                     </div>
 
-
-                    <div class="checkout-widget checkout-card mb-5">
-                        <h6 class="subtitle">Informations de l'utilisateur </h6>
-                        <form class="payment-card-form" id="form-utilisateur-creation">
-                            <div class="form-group w-100">
-                                <label for="card1">Nom(s) et prénom(s)</label>
-                                <input type="text" id="nom_prenom" name="nom_prenom">
-                                <div class="right-icon">
-                                    <i class="flaticon-lock"></i>
-                                </div>
-                            </div>
-                            <div class="form-group w-100">
-                                <label for="card2"> Login</label>
-                                <input type="text" id="login" name="login">
+                    <div id="form"  class="checkout-widget checkout-contact">
+                        <h5 class="title">Ajouter un <?= $model ?> </h5>
+                        <form id="form-<?= $model ?>" class="checkout-contact-form"  method="POST" action="<?= URL::link("$model-controller");?>" autocomplete="off">
+                            <div class="form-group">
+                                <input type='text' name='nom_prenom' placeholder='nom et prénom'  value="<?= isset($_GET['nom_prenom'])? RequestHelper::decodeUrlParam($_GET['nom_prenom']) :"" ?>"  required>
                             </div>
                             <div class="form-group">
-                                <label for="passoword-0">mot de passe</label>
-                                <input type="text" id="password-0" name="password-0" placeholder="mot de passe">
+                                <input type='text' name='login' placeholder='login'  autocomplete='nope'  value="<?= isset($_GET["login"])? RequestHelper::decodeUrlParam($_GET['login']) :"" ?>"  required>
                             </div>
                             <div class="form-group">
-                                <label for="passoword-1">Confirmer mot de passe</label>
-                                <input type="text" id="passoword-1" placeholder="confirmation mot de passe">
-                            </div>
-                            <div class="form-group check-group">
-                                <input id="card5" type="checkbox" checked>
-                                <label for="card5">
-                                    <span class="title">Je confirme</span>
-                                    <span class="info">Toutes les informations saisies sont bien celle d'un utilisateurs du de Biblio IAI.</span>
-                                </label>
+                                <input type='password' id='password-0' pattern='(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}' title=" au moins 6 lettres, au moins un chiffre,  au moins une lettre majuscule" name="password-0" placeholder="mot de passe"   autocomplete="new-password" required>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="custom-button" name="connexion" value="Enregistrer">
+                                <input type='password' id='password-1' pattern='(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\S{6,}' title=" au moins 6 lettres, au moins un chiffre,  au moins une lettre majuscule" name="password-1" placeholder="repeter mot de passe"   autocomplete="new-password" required>
                             </div>
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="<?= $_GET["id"]??"" ?>" >
+                                <input type="submit" name="<?= isset($_GET["nom_prenom"])?"modifier": "enregistrer"; ?>" value="<?= isset($_GET["nom_prenom"])?"Modifier": "Enregistrer"; ?>" class="custom-button">
+                                <?= isset($_GET["nom_prenom"])? "<a class='custom-button transparent'  href=\"". URL::link($model) ."#form\" >Annuler</a>": "" ?>
+                            </div>
+                            <!-- <div class="form-group">
+                                <input type="reset" value="Annuler" class="custom-button transparent">
+                            </div> -->
                         </form>
-                        <p class="notice">
-                            Cliquer pour enregistrer ce nouvel utilisateur en base de données <a href="#0"> Creer utilisateur</a>
-                        </p>
                     </div>
 
-                    
 
-
-                    <div id="liste-utilisateurs" class="checkout-widget checkout-contact">
+                    <div id="liste" class="checkout-widget checkout-contact">
                         <div class="filter-main">
-                            <div class="left">
-                                <div class="item"> <h5 class="show" >Liste des utilisateurs</h5> </div>
+                            <div class=""> <h5 class=" " >Liste des <?= $model ?>s</h5> </div> <br>
+                            <br>
+                            <form id="form-recherche" class=" ticket-search-form left title" method="POST" action="<?= URL::link("$model-controller");?>">
+                                <div class="item form-group">
+                                    <input type="text" name="mot_cle" placeholder="nom ou login">
+                                    <button type="submit" title="Filtrer vos resultats"><i class="fas fa-search"></i></button>
+                                    <input type="hidden" name="rechercher" >
+                                </div>
                                 <div class="item">
-                                    <span class="show">Show :</span>
-                                    <select class="select-bar">
-                                        <option value="12">12</option>
-                                        <option value="27">27</option>
-                                        <option value="30">30</option>
+                                    <span class="show">Trier par :</span>
+                                    <select name="critere" class="select-bar">
+                                        <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_modification")? "selected":""; ?> value="date_modification">Modifié le</option>
+                                        <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "nom_prenom")? "selected":""; ?> value="nom_prenom">libellé</option>
+                                        <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_creation")? "selected":""; ?> value="date_creation">Crée le</option>
                                     </select>
                                 </div>
-                            </div>
+                                <div class="item">
+                                    <span class="show"> Ordre :</span>
+                                    <select name="parametre" class="select-bar">
+                                        <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "desc")? "selected":""; ?> value="desc">Descendant</option>
+                                        <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "asc")? "selected":""; ?> value="asc">Ascendant</option>
+                                    </select>
+                                </div>
+                              
+                                
+                            </form>
                         </div> 
-
-                        <div class="filter-tab tab">
-                            <div class="filter-area">
-                                <div class="filter-main">
-                                    <div class="left">
-                                        <div class="item"> <h5 class="show" >Liste des utilisateurs</h5> </div>
-
-                                        <div class="item">
-                                            <span class="show">Show :</span>
-                                            <select class="select-bar">
-                                                <option value="12">12</option>
-                                                <option value="15">15</option>
-                                                <option value="18">18</option>
-                                                <option value="21">21</option>
-                                                <option value="24">24</option>
-                                                <option value="27">27</option>
-                                                <option value="30">30</option>
-                                            </select>
-                                        </div>
-                                        <div class="item">
-                                            <span class="show">Sort By :</span>
-                                            <select class="select-bar">
-                                                <option value="showing">now showing</option>
-                                                <option value="exclusive">exclusive</option>
-                                                <option value="trending">trending</option>
-                                                <option value="most-view">most view</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <ul class="grid-button tab-menu">
-                                        <li>
-                                            <i class="fas fa-th"></i>
-                                        </li>                            
-                                        <li class="active">
-                                            <i class="fas fa-bars"></i>
-                                        </li>                            
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tab-area">
-                                <div class="tab-item">
-                                    <div class="row mb-10 justify-content-center">
-                                        <?php
-                                            foreach($doc as $documents){ ?>
-                                                <div class="col-sm-6 col-lg-4">
-                                                    <div class="movie-grid">
-                                                        <div class="movie-thumb c-thumb">
-                                                            <a href="movie-details.html">
-                                                                <img src="assets/images/movie/movie01.jpg" alt="movie">
-                                                            </a>
-                                                        </div>
-                                                        <div class="movie-content bg-one">
-                                                            <h5 class="title m-0">
-                                                                <a href="movie-details.html"><?= $doc->theme; ?> </a>
-                                                            </h5>
-                                                            <ul class="movie-rating-percent">
-                                                                <li>
-                                                                    <div class="thumb">
-                                                                        <img src="assets/images/movie/tomato.png" alt="movie">
-                                                                    </div>
-                                                                    <span class="content"><?= $doc->note_obtenue; ?></span>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="thumb">
-                                                                        <img src="assets/images/movie/cake.png" alt="movie">
-                                                                    </div>
-                                                                    <span class="content"><?= $doc->superviseur; ?></span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                        <?php } ?>
-                                        
-                                    </div>
-                                </div>
-                                <div class="tab-item active">
-                                    <div class="movie-area mb-10">
-                                        <?php
-                                            foreach($documents as $doc){ ?>
-
-                                                <div class="movie-list">
-                                                    <div class="movie-thumb c-thumb">
-                                                        <a href="movie-details.html" class="w-100 bg_img h-100" data-background="assets/images/movie/movie01.jpg">
-                                                            <img class="d-sm-none" src="assets/images/movie/movie01.jpg" alt="movie">
-                                                        </a>
-                                                    </div>
-                                                    <div class="movie-content bg-one">
-                                                        <h5 class="title">
-                                                            <a href="movie-details.html"><?= $doc->theme; ?></a>
-                                                        </h5>
-                                                        <p class="duration"><?= $doc->note_obtenue; ?></p>
-                                                        <div class="movie-tags">
-                                                            <?php 
-                                                                foreach($liste_mots_cles as $mot_cle){ ?>
-                                                                    <a href="#0"><?= $mot_cle; ?></a>
-                                                            <?php } 
-                                                            
-                                                            
-                                                            ?>
-                                                            
-                                                        </div>
-                                                        <div class="release">
-                                                            <span>Cycle: </span> <a href="#0"> <?= $doc->date_archive; ?></a>
-                                                        </div>
-                                                        <div class="release">
-                                                            <span>Année Academaique: </span> <a href="#0"> <?= $doc->date_archive; ?></a>
-                                                        </div>
-                                                        <div class="release">
-                                                            <span>Date d'archivage: </span> <a href="#0"> <?= $doc->date_archive; ?></a>
-                                                        </div>
-                                                        <ul class="movie-rating-percent">
-                                                            <li>
-                                                                <div class="thumb">
-                                                                    <img src="assets/images/movie/tomato.png" alt="movie">
-                                                                </div>
-                                                                <span class="content"><?= $doc->etudiant; ?></span>
-                                                            </li>
-                                                            <li>
-                                                                <div class="thumb">
-                                                                    <img src="assets/images/movie/cake.png" alt="movie">
-                                                                </div>
-                                                                <span class="content"><?= $doc->superviseur; ?></span>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="book-area">
-                                                            <div class="book-ticket">
-                                                                <div class="react-item">
-                                                                    <a href="#0">
-                                                                        <div class="thumb">
-                                                                            <img src="assets/images/icons/heart.png" alt="icons">
-                                                                        </div>
-                                                                        <span>Supprimer</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="react-item mr-auto">
-                                                                    <a href="#0">
-                                                                        <div class="thumb">
-                                                                            <img src="assets/images/icons/book.png" alt="icons">
-                                                                        </div>
-                                                                        <span>Modifier</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="react-item">
-                                                                    <a href="#0" class="popup-video">
-                                                                        <div class="thumb">
-                                                                            <img src="assets/images/icons/play-button.png" alt="icons">
-                                                                        </div>
-                                                                        <span>Consulter</span>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            <?php } ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pagination-area text-center">
-                                <a href="#0"><i class="fas fa-angle-double-left"></i><span>Prev</span></a>
-                                <a href="#0">1</a>
-                                <a href="#0">2</a>
-                                <a href="#0" class="active">3</a>
-                                <a href="#0">4</a>
-                                <a href="#0">5</a>
-                                <a href="#0"><span>Next</span><i class="fas fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
 
                         <div class="tab-item active">
 
@@ -297,8 +171,8 @@
                                                     </a>
                                                 </div>
                                                 <div class="movie-review-info">
-                                                    <span class="reply-date">login</span>
-                                                    <h6 class="subtitle"><a href="#0">Nom complet</a></h6>
+                                                    <span class="reply-date"><?= $utilisateur['login'] ?></span>
+                                                    <h6 class="subtitle"><a href="#0"><?= $utilisateur['nom_prenom'] ?></a></h6>
                                                     <!-- <span><i class="fas fa-check"></i> verified review</span> -->
                                                 </div>
                                             </div>
@@ -306,10 +180,10 @@
                                                 <div class="review"> </div>
                                                 
                                                 <div class="review-meta">
-                                                    <a href="#0">
+                                                    <a href="javascript: void(0);" onclick='goto("<?= $utilisateur['id'] ?>", "<?= RequestHelper::encodeUrlParam($utilisateur['nom_prenom']) ?>", "<?= RequestHelper::encodeUrlParam($utilisateur['login']) ?>");'>
                                                         <i class="fa fa-edit"  aria-hidden="true"></i>  <span > Modifier</span>
                                                     </a>
-                                                    <a href="#0" class="dislike">
+                                                    <a href="#" href="#" data-record-id="<?= $utilisateur['id'] ?>" data-record-title="<?= $utilisateur['nom_prenom'] ?>" data-toggle="modal" data-target="#confirm-delete" class="dislike">
                                                         <i class="fa fa-trash-alt"  aria-hidden="true"></i>  <span > Supprimer</span>
                                                     </a>
                                                     
@@ -318,7 +192,7 @@
                                         </div>
                                     <?php } ?>
                                     <div class="load-more text-center">
-                                        <a href="#0" class="custom-button transparent">Voir plus</a>
+                                        <a  class="custom-button transparent">Voir plus</a>
                                     </div>
                                     
                             <?php  }else{  ?>
@@ -330,11 +204,6 @@
                         </div>
 
                     </div>
-
-
-
-
-                    
                     
                 </div>
                 
@@ -351,18 +220,41 @@
     </div>
     <!-- ==========Event-Section========== -->
 
-
-
     <!-- ==========Footer-Section========== -->
     <?php include "_partials/footer.php" ?>
     <!-- ==========Footer-Section========== -->
 
 
+    <!-- ==========Modal-Section========== http://plnkr.co/edit/IoBvHwW6pr4Msa5u -->
+    <?php include "_partials/crud-modal-delete.php" ?>
+    <!-- ==========Modal-Section========== -->
+    
     <?php include "_partials/javascript.php" ?>
 
-    <?php include "_partials/footer-page.php" ?>
-    <?php include "./document-script.php" ?>
-</body>
+    <?php include "_partials/crud-modal-delete-script.php" ?>
+    <?php include "_partials/anchor-script.php" ?>
+
+    <script>
+        function goto(id, nom_prenom, login){
+            window.location.href = "<?= URL::link($model) ?>?id="+id+"&nom_prenom="+ nom_prenom +"&login="+ login +"#form"
+        }
+    </script>
+
+    <script>
+        let password = document.getElementById("password-0")
+        let confirm_password = document.getElementById("password-1")
+
+        function validatePassword(){
+            if(password.value != confirm_password.value)
+                confirm_password.setCustomValidity("Mot de passe non identique")
+             else
+                confirm_password.setCustomValidity('')
+        }
+
+        password.onchange = validatePassword
+        confirm_password.onkeyup = validatePassword
+    </script>
+
 
 
 </html>

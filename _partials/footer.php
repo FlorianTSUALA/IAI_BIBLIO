@@ -9,7 +9,7 @@
         <div class="container">
             <div class="footer-top">
                 <div class="logo">
-                    <a href="index-1.html">
+                    <a href="<?= URL::link("accueil") ;?>">
                         <img src="assets/images/footer/footer-logo.png" alt="footer">
                     </a>
                 </div>
@@ -48,7 +48,7 @@
                     </div>
                     <ul class="links">
                         <li>
-                            <a href="#0">A propos</a>
+                            <a href="<?= URL::link("apropos") ;?>">A propos</a>
                         </li>
                         <li>
                             <a href="#0">Termes d'utilisation</a>
