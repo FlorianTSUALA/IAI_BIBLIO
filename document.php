@@ -1,6 +1,7 @@
 <?php
     
     require_once('core/Redirector.php');    
+    require_once("core/Helper/RequestHelper.php");
     require_once('core/service/DocumentService.php');
     require_once('core/service/CycleService.php');
     require_once('core/service/EnseignantService.php');
@@ -14,7 +15,24 @@
     $model = 'document';
     $link = URL::link($model); 
     $page = $model;
-    
+
+    if(isset($_GET['id'])){
+        $document = DocumentService::get(RequestHelper::get('id'));
+
+        $theme = $document['theme']; 
+        $structure_accueil = $document['structure_accueil']; 
+        $liste_mots_cles = $document['liste_mots_cles']; 
+        $etudiant = $document['etudiant']; 
+        $id_cycle = $document['id_cycle']; 
+        $id_superviseur = $document['id_superviseur']; 
+        $note_obtenue = $document['note_obtenue']; 
+        $annee_academ = $document['annee_academ'];
+        $fichier = $document['fichier']; 
+        $img_couv = $document['img_couv']; 
+            
+
+    }
+
  ?>
 
 <!DOCTYPE html>
@@ -66,11 +84,7 @@
     <!-- ==========Header-Section========== -->
 
     <!-- ==========Crud-Banner-Section========== -->
-    <?php
-        $model="document"; 
-        $link = URL::link($model);
-        include "_partials/crud_banner.php" 
-    ?>
+    <?php include "_partials/crud_banner.php"  ?>
     <!-- ==========Crud-Banner-Section========== -->
 
 
@@ -84,28 +98,28 @@
                         <form id="form" class="ticket-search-form payment-card-form"   method="POST" action="<?= URL::link("$model-controller");?>"  enctype="multipart/form-data" >
                             <div class="form-group w-100">
                                 <label for="theme">Theme</label>
-                                <input type="text" id="theme" name="theme" required>
+                                <input type="text" value="<?= $theme??"" ?>" id="theme" name="theme" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="structure_accueil">Structure d'accueil</label>
-                                <input type="text" id="structure_accueil" name="structure_accueil" required>
+                                <input type="text" id="structure_accueil"   value="<?= $structure_accueil??"" ?>" name="structure_accueil" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="liste_mots_cles"> Liste des mots clés</label>
-                                <input type="text" id="liste_mots_cles" name="liste_mots_cles" placeholder="saisir un mot puis sur la touche appuyer sur entrer pour l'ajouter" data-role="tagsinput" value="" required>
+                                <input type="text" id="liste_mots_cles" value="<?= $liste_mots_cles??"" ?>" name="liste_mots_cles" placeholder="saisir un mot puis sur la touche appuyer sur entrer pour l'ajouter" data-role="tagsinput" value="" required>
                                 <div class="right-icon">
                                     <i class="flaticon-tag-button-with-happy-face"></i>
                                 </div>
                             </div>
                             <div class="form-group w-100">
                                 <label for="etudiant"> Etudiant</label>
-                                <input type="text" id="etudiant" name="etudiant" required>
+                                <input type="text" id="etudiant" name="etudiant" value="<?= $etudiant??"" ?>" required>
                                 <div class="right-icon">
                                     <i class="flaticon-lock"></i>
                                 </div>
@@ -115,7 +129,7 @@
                                 <select class="select-bar" name="cycle" id="cycle" required>
                                     <!-- <option value="-----">Choisissez une valeur</option> -->
                                     <?php foreach($cycles as $cycle){
-                                        echo "<option value='".$cycle["id"]."' >".$cycle["libelle"]."</option>";
+                                        echo "<option value='".$cycle["id"]."' ".( ($id_cycle == $cycle["id"])? "selected" : "" ).">".$cycle["libelle"]."</option>";
                                     } ?>
                                 </select>
                             </div>
@@ -124,7 +138,7 @@
                                 <select class="select-bar" name="superviseur" id="superviseur" required>
                                     <!-- <option value="-----">Choisissez une valeur</option> -->
                                     <?php foreach($superviseurs as $enseignant){
-                                        echo "<option value='".$enseignant["id"]."' >".$enseignant["nom_prenom"]."</option>";
+                                        echo "<option value='".$enseignant["id"]."' ".( ($id_superviseur == $enseignant["id"])? "selected" : "" )." >".$enseignant["nom_prenom"]."</option>";
                                     } ?>
                                 </select>
                             </div>
@@ -133,22 +147,25 @@
 
                             <div class="form-group">
                                 <label for="note_obtenue">Note obtenue</label>
-                                <input type="number" id="note_obtenue" name="note_obtenue" placeholder="Note obtenu" >
+                                <input type="number" id="note_obtenue" name="note_obtenue"  value="<?= $note_obtenue??"0" ?>" placeholder="Note obtenu" >
                             </div>
                             <div class="form-group">
                                 <label for="annee_academ">Année academique</label>
-                                <input type="text" id="annee_academ" name="annee_academ" pattern="[1-2][0-9]{3}-[1-2][0-9]{3}" title="Veuillez entrer une année scolaire respectant ce motif 2010-2012 valide " placeholder="YYYY-YYYY" required>
+                                <input type="text" id="annee_academ" name="annee_academ"  value="<?= $annee_academ??"" ?>" pattern="[1-2][0-9]{3}-[1-2][0-9]{3}" title="Veuillez entrer une année scolaire respectant ce motif 2010-2012 valide " placeholder="YYYY-YYYY" required>
                             </div>
                             
                             <div class="form-group image-upload">
-                                <input type="file" name="fichier" id="file-pdf" class="inputfile inputfile-doc" accept="application/pdf" required/>
+                                <!-- <input type="hidden" name="_fichier"  value="<?= $fichier??"" ?>" > -->
+                                <!-- <input type="hidden" name="_contenu"  value="<?= $contenu??"" ?>" > -->
+                                <input type="file" name="fichier" id="file-pdf" class="inputfile inputfile-doc" accept="application/pdf"  <?= isset($_GET['id'])?"":"required" ?>/>
                                 <label for="file-pdf">
                                     <?= include "core/icons/pdf.php" ?>
                                     <span>Document&hellip;</span>
                                 </label>
                             </div>
                             <div class="form-group image-upload">
-                                <input type="file" name="img_couv" id="file-img" class="inputfile inputfile-doc" accept="image/*" required/>
+                                <!-- <input type="hidden" name="_img_couv"  value="<?= $img_couv??"" ?>" > -->
+                                <input type="file" name="img_couv" id="file-img" class="inputfile inputfile-doc" accept="image/*" <?= isset($_GET['id'])?"":"required" ?>/>
                                 <label for="file-img">
                                     <?= include "core/icons/picture.php" ?>
                                     <span>Image Couverture&hellip;</span>
@@ -157,21 +174,22 @@
                             <div class="row">
                                 <div id="pdf-preview" >
                                     <iframe id="pdf-display"
-                                        src="<?= BASE_URL;?>media/PDF/apercu_pdf.pdf"
+                                        src="<?= BASE_URL;?>media/PDF/<?= $fichier??"apercu_pdf.pdf" ?>"
                                         style="width:500px; height:500px;" frameborder="0"></iframe>
                                 </div>
                                 <div id="img-preview">
-                                    <img id="img-display" src="<?= BASE_URL;?>media/IMG/apercu_img.png" style=" margin-left: 10px; max-width: 210px;" alt="apercu_img">
+                                    <img id="img-display" src="<?= BASE_URL;?>media/IMG/<?= $img_couv??"apercu_img.png" ?>" style=" margin-left: 10px; max-width: 210px;" alt="apercu_img">
                                 </div>
                             </div>
                             <div class="form-group check-group">
                                 <input id="card5" type="checkbox" checked>
                                 <label for="card5">
+                                    <input name="id" value="<?= $_GET['id']??"" ?>" type="hidden" checked>
                                     <span class="info">Je confirme que ce document respecte les termes et conditions d'utlisateus du URL.</span>
                                 </label>
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="custom-button" name="enregistrer" value="Enregistrer le document">
+                                <input type="submit" class="custom-button" name="<?= isset($_GET['id'])?"modifier":"enregistrer" ?>" value="<?= isset($_GET['id'])?"Modifier":"Enregistrer" ?> le document">
                             </div>
                             <p class="notice">
                                 Tout document enregistré est en accord avec les termes de <a href="#0">termes et de les conditions de droits de propriétés intellectuels</a>
@@ -193,46 +211,24 @@
                             <?php foreach($documents as $document){?>
                                 
                                 <div class="col-sm-6 col-lg-4">
-                                    <div class="movie-grid">
+                                    <div class="event-grid">
                                         <div class="movie-thumb c-thumb">
                                             <a href="<?= URL::link("document-detail")."?id=".$document["id"] ?>">
-                                                <img src="<?= URL::img( $document["img_couv"]) ?>" height="322px" alt="movie">
+                                                <img src="<?= URL::img( $document["img_couv"]) ?>" height="322px" alt="document">
                                             </a>
                                             <div class="event-date">
-                                                <h6 class="date-title">28</h6>
-                                                <span>Dec</span>
+                                                <h6 class="date-title text-center"><?= DBHelper::getDay($document["date_archive"]) ?></h6>
+                                                <span><?= DBHelper::getMois($document["date_archive"]) ?></span>
+                                                <span><?= DBHelper::getAnnee($document["date_archive"]) ?></span>
                                             </div>
                                         </div>
                                         <div class="movie-content bg-one">
                                             <h5 class="title m-0">
-                                                <a href="#0">alone</a>
+                                                <a href="<?= URL::link("document-detail")."?id=".$document["id"] ?>"><?= $document["theme"] ?></a>
                                             </h5>
-                                            <ul class="movie-rating-percent">
-                                                <li>
-                                                    <a href="#">
-                                                        <div class="thumb">
-                                                            <img src="assets/images/movie/tomato.png" alt="movie">
-                                                        </div>
-                                                        <span class="content"><?= $document["note_obtenue"]; ?></span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <div class="thumb">
-                                                            <img src="assets/images/movie/tomato.png" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
-                                                        <div class="thumb">
-                                                            <img src="assets/images/movie/tomato.png" alt="movie">
-                                                        </div>
-                                                        <span class="content">88%</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            <div class="movie-rating-percent">
+                                                <span><?= $document["structure_accueil"] ?></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -11,7 +11,7 @@
                         <a href="<?= URL::link('accueil') ?>" <?= ($page === "accueil")? "class='active'":"" ?> >accueil</a>
                     </li>
                     <li>
-                        <a href="<?= URL::link("document-list");?>" <?= ($page === "documents")? "class='active'":"" ?> >Nos Documents</a>
+                        <a href="<?= URL::link("document-list");?>" <?= ($page === "document-list")? "class='active'":"" ?> >Nos Documents</a>
                     </li>
                     <?php 
                             if(UtilisateurService::checkActive()){ ?>

@@ -60,8 +60,8 @@ class DBHelper {
     $sql = "select * from {$table} order by {$critere} {$parametre};";
     $req = DBHelper::connexion()->prepare($sql);
     $req->execute();
-    $documents = $req->fetchAll();
-    return $documents;
+    $result = $req->fetchAll();
+    return $result;
   }
 
   public static function sortBy ($table, $critere, $parametre, $champs, $mot_cle){
@@ -77,8 +77,8 @@ class DBHelper {
     $sql = "select * from $table $clause_where order by $critere $parametre;";
     $req = DBHelper::connexion()->prepare($sql);
     $req->execute();
-    $documents = $req->fetchAll();
-    return $documents;
+    $result = $req->fetchAll();
+    return $result;
   }
 
 
@@ -101,16 +101,24 @@ class DBHelper {
     $sql = "select * from $table order by date_modification desc;";
     $req = DBHelper::connexion()->prepare($sql);
     $req->execute();
-    $documents = $req->fetchAll();
-    return $documents;
+    $result = $req->fetchAll();
+    return $result;
+  }
+
+  public static function get($table, $id){
+    $sql = "select * from $table where id=$id;";
+    $req = DBHelper::connexion()->prepare($sql);
+    $req->execute();
+    $result = $req->fetch();
+    return $result;
   }
 
   public static function getLast($table, $total){
     $sql = "select * from $table order by date_modification desc limit $total; ";
     $req = DBHelper::connexion()->prepare($sql);
     $req->execute();
-    $documents = $req->fetchAll();
-    return $documents;
+    $result = $req->fetchAll();
+    return $result;
   }
 
 public static function getCount($table){
@@ -191,6 +199,19 @@ public static function update($table, $id, $data){
       }
     return $data;
   }*/
+
+  public static function buildLikeClause($field, $text)
+  {
+    $keyword = explode(' ', $text);
+    $clause = '';
+
+    foreach($keyword as $word){
+      $clause .= (' '.$field . ' LIKE "%'. $word.'%" OR');
+    }
+    
+    $clause =  substr($clause, 0, -2);
+    return $clause;
+  }
 
   public static function slugify($text)
   {

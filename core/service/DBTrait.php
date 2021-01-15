@@ -14,6 +14,10 @@ trait DBTrait{
         return DBHelper::getAll(self::getTable());
     }
 
+    public static function get($id){
+        return DBHelper::get(self::getTable(), $id);
+    }
+
     public static function getLast($total){
         return DBHelper::getLast(self::getTable(), $total);
     }

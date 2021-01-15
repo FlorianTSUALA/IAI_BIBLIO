@@ -8,7 +8,7 @@
         if(isset($_GET['mot_cle']) && !empty($_GET['mot_cle']))
             $utilisateurs = UtilisateurService::sortBy($_GET['critere'], $_GET['parametre'], ['nom_prenom', 'departement'], $_GET['mot_cle']);
         else
-            $utilisateurs = UtilisateurService::sort($_GET['critere'], $_GET['parametre']);
+            $utilisateurs = UtilisateurService::sort($_COOKIE['critere'], $_COOKIE['parametre']);
     }else{
         $utilisateurs = UtilisateurService::getAll();
     }

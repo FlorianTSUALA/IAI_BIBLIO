@@ -20,7 +20,7 @@
 
 
 
-    $page = "document-detail";
+    $page = "document-list";
     require_once('core/URL.php');
     require_once 'core/service/UtilisateurService.php';
     require_once 'core/Helper/RequestHelper.php';
@@ -38,51 +38,80 @@
         d.note_obtenue, e.nom_prenom AS superviseur, d.annee_academ,
         d.img_couv AS img_couv, d.fichier, d.date_archive, d.contenu 
         FROM document d
-        LEFT JOIN cycle c ON c.id = d.id_cycle
-        LEFT JOIN enseignant e ON e.id = d.id_superviseur
+        LEFT JOIN cycle c ON c.id=d.id_cycle
+        LEFT JOIN enseignant e ON e.id=d.id_superviseur
          order by d.date_modification desc; ";
 
          $documents = DBHelper::execSelectAll($sql);
-    
-         
 
-
-         if(isset($_GET['rechercher'])){
-
-            $where_clause = "where";
-      
-            $where_clause .= ($mot_cle == "")? "": " theme like %$mot_cle% OR liste_mots_cles like %$mot_cle% OR etudiant like %$mot_cle% OR structure_accueil like %$mot_cle% ";
-            $where_clause .= ($annee_academ == "*")? "": "annee_academ=$annee_academ";
-            $where_clause .= ($cycle == "*")? "": "AND cycle=$cycle";
-            $where_clause .= ($superviseur == "*")? "": "AND superviseur=$superviseur"; 
+         if (isset($_POST['filtrer'])) {
             
-             
-          
-            $where_clause = (($annee_academ == "*") &&($cycle == "*") &&($superviseur == "*"))? "" : $where_clause;
-          
-            $order_clause = " order by $critere $parametre;";
+            $location = $_POST['filtrer'];
+
+            $critere = RequestHelper::post('critere');
+            $parametre = RequestHelper::post('parametre');
             
+            $criteres = array('date_creation', 'date_modification', 'libelle');
+            $parametres = array('desc', 'asc');
+            $$option_search = array('simple', 'multi-critere', 'contenu');
+            
+            if (in_array($parametre, $parametres) && in_array($critere, $criteres)) {
+              setcookie('rechercher', 'ON', time() + 86400, "/");
+              setcookie('critere', $critere, time() + 86400, "/");
+              setcookie('parametre', $parametre, time() + 86400, "/");
+            }
+            header("location: $location");
+            // exit();
+          
+        } 
+
+        if(isset($_GET['rechercher'])){
+            $location = URL::link('document-list').'?'.$_SERVER['QUERY_STRING'].'#filter';
+           
+            $option = RequestHelper::decodeUrlParam(RequestHelper::get('rechercher'));
+
+            $mot_cle = RequestHelper::decodeUrlParam(RequestHelper::get('mot_cle'));
+            $annee_academ = RequestHelper::decodeUrlParam(RequestHelper::get('annee_academ'));
+            $cycle = RequestHelper::decodeUrlParam(RequestHelper::get('cycle'));
+            $superviseur = RequestHelper::decodeUrlParam(RequestHelper::get('superviseur'));
+            
+            $critere = $_COOKIE['critere'];
+            $parametre = $_COOKIE['parametre'];
+
+            $where_clause = '';
+
+            $clause_mot_cle = ($mot_cle == '')? '': " ". DBHelper::buildLikeClause('theme', $mot_cle) ." OR ". DBHelper::buildLikeClause('liste_mots_cles', $mot_cle) ." OR ". DBHelper::buildLikeClause('etudiant', $mot_cle) ." OR ". DBHelper::buildLikeClause('structure_accueil', $mot_cle) ." ";
+            $clause_mot_cle = ($option == 'multi')? $clause_mot_cle :  (($clause_mot_cle == '')?  $clause_mot_cle : $clause_mot_cle ."  OR ". DBHelper::buildLikeClause('contenu', $mot_cle) ." ") ; 
+            $where_clause = ( ($clause_mot_cle == '') )?  (($where_clause == '')? '' : $where_clause) : (($where_clause == '')? $clause_mot_cle : $where_clause." OR ". $clause_mot_cle);
+            
+            $where_clause = ( ($annee_academ == "*") )?  (($where_clause == '')? '' : $where_clause) : (($where_clause == '')? " annee_academ=\"$annee_academ\" " : $where_clause." OR annee_academ=\"$annee_academ\" ");
+            $where_clause = ( ($cycle == "*") )?  (($where_clause == '')? '' : $where_clause) : (($where_clause == '')? " id_cycle=\"$cycle\" " : $where_clause." OR id_cycle=\"$cycle\" ");
+            $where_clause = ( ($superviseur == "*") )?  (($where_clause == '')? '' : $where_clause) : (($where_clause == '')? " id_superviseur=\"$superviseur\" " : $where_clause." OR id_superviseur=\"$superviseur\" ");
+            $where_clause = ($where_clause == '')? '' : "WHERE $where_clause";
+
+
+            $order_clause =  (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON')? "order by d.{$critere} $parametre;" : '';
+            
+
             $sql = "SELECT d.id, d.theme, c.libelle AS cycle, 
             d.structure_accueil, d.etudiant, 
             d.liste_mots_cles,
             d.note_obtenue, e.nom_prenom AS superviseur, d.annee_academ,
             d.img_couv AS img_couv, d.fichier, d.date_archive, d.contenu 
             FROM document d
-            LEFT JOIN cycle c ON c.id = d.id_cycle
-            LEFT JOIN enseignant e ON e.id = d.id_superviseur $where_clause $order_clause";
+            LEFT JOIN cycle c ON c.id=d.id_cycle
+            LEFT JOIN enseignant e ON e.id=d.id_superviseur 
+            $where_clause 
+            $order_clause";
           
-            $criteres = array('date_creation', 'date_modification', 'libelle');
-            $parametres = array('desc', 'asc');
-            $option_search = array('simple', 'multi-critere', 'contenu');
-            
+            // var_dump($sql); die();
+
             $documents = DBHelper::execSelectAll($sql);
     
         }
 
-
        
  ?>
-
 
 
 <!DOCTYPE html>
@@ -216,27 +245,27 @@
                         <div class="filter-area">
                             <div class="filter-main">
                                 <div class="left">
-                                    <form id="form-recherche" class=" ticket-search-form left title" method="POST" action="<?= URL::link("$model-controller");?>">
+                                    <form id="form-recherche" class=" ticket-search-form left title" method="POST" action="<?= URL::link("document-list");?>">
                                         
                                         <div class="item">
                                             <span class="show">Trier par :</span>
                                             <select name="critere" class="select-bar">
-                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_modification")? "selected":""; ?> value="date_modification">Modifié le</option>
-                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "nom_prenom")? "selected":""; ?> value="nom_prenom">libellé</option>
-                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_creation")? "selected":""; ?> value="date_creation">Crée le</option>
+                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_modification")? "selected":''; ?> value="date_modification">Modifié le</option>
+                                                <!-- <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "nom_prenom")? "selected":''; ?> value="nom_prenom">libellé</option> -->
+                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['critere'] ==  "date_creation")? "selected":''; ?> value="date_creation">Crée le</option>
                                             </select>
                                         </div>
                                         <div class="item">
                                             <span class="show"> Ordre :</span>
                                             <select name="parametre" class="select-bar">
-                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "desc")? "selected":""; ?> value="desc">Descendant</option>
-                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "asc")? "selected":""; ?> value="asc">Ascendant</option>
+                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "desc")? "selected":''; ?> value="desc">Descendant</option>
+                                                <option <?= (isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON' && $_COOKIE['parametre'] ==  "asc")? "selected":''; ?> value="asc">Ascendant</option>
                                             </select>
                                         </div>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="item form-group">
                                             <button type="submit" title="Filtrer vos resultats"><i class="fas fa-search"></i></button>
-                                            <input type="hidden" name="filtrer" >
+                                            <input type="hidden" name="filtrer" value="<?= $location??"" ?>" >
                                         </div>
                                     </form>
                                 </div>
@@ -250,8 +279,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="tab-area">
-                            <div class="tab-item">
+                        <div id="list" class="tab-area">
+                            <div class="tab-item ">
                                 <div class="row mb-10 justify-content-center">
                                     <?php
                                         foreach($documents as $doc ){ ?>
@@ -269,13 +298,19 @@
                                                         <ul class="movie-rating-percent">
                                                             <li>
                                                                 <div class="thumb">
-                                                                    <img src="assets/images/movie/tomato.png" alt="note">
+                                                                    <img src="assets/images/movie/pictrue.png" alt="note">
                                                                 </div>
                                                                 <span class="content"> <span class="duration">Note Obtenue :</span> <?= $doc['note_obtenue']; ?></span>
                                                             </li>
                                                             <li>
                                                                 <div class="thumb">
-                                                                    <img src="assets/images/movie/cake.png" alt="superviseur">
+                                                                    <img src="assets/images/movie/pictrue.png" alt="note">
+                                                                </div>
+                                                                <span class="content"> <span class="duration">Cycle :</span> <?= $doc['cycle']; ?></span>
+                                                            </li>
+                                                            <li>
+                                                                <div class="thumb">
+                                                                    <img src="assets/images/movie/pictrue.png" alt="superviseur">
                                                                 </div>
                                                                 <span class="content"> <span class="duration">Superviseur :</span> <?= $doc['superviseur']; ?></span>
                                                             </li>
@@ -302,33 +337,55 @@
                                                     <h5 class="title">
                                                         Theme : <a href="<?= URL::link("document-detail")."?id=".$doc["id"] ?>"><?= $doc['theme']; ?></a>
                                                     </h5>
-                                                    <p class=""> <sapn class="duration" >Note Obtenue :</sapn> <?= $doc['note_obtenue']; ?></p>
-                                                    <span class="duration">Liste de mot clés :</span>
-                                                    <div class="movie-tags"> 
-                                                        <?php
-                                                            foreach(array($doc['liste_mots_cles']) as $mot_cle){ ?>
-                                                                <a href="#0"><?= $mot_cle; ?></a>
-                                                        <?php } ?>
-                                                    </div>
-                                                    <div class="release">
-                                                    <span class="duration" >Date archive :</span> <a href="#0"> <?= DBHelper::dateToFrench($doc['date_archive']); ?></a>
-                                                    </div>
-                                                    <div class="release">
-                                                        <span class="duration">Année Academaique: </span> <a href="#0"> <?= $doc['date_archive']; ?></a>
-                                                    </div>
                                                     
                                                     <ul class="movie-rating-percent">
                                                         <li>
                                                             <div class="thumb">
-                                                                <img src="assets/images/movie/tomato.png" alt="etudiant">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
                                                             </div>
-                                                            <span class="content"><span class="duration">Etudiant : </span><?= $doc['etudiant']; ?></span>
+                                                            <span class="duration" >&nbsp; &nbsp; Note Obtenue :</span> <span> &nbsp; &nbsp; <?php
+                                                            $mot_cles = '';
+                                                            foreach(array($doc['liste_mots_cles']) as $mot_cle){ 
+                                                                $mot_cles .= (' '.$mot_cle .' -');
+                                                             } 
+                                                             echo substr($mot_cles, 0, -1);
+                                                             ?></span>
                                                         </li>
                                                         <li>
                                                             <div class="thumb">
-                                                                <img src="assets/images/movie/cake.png" alt="superviseur">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
                                                             </div>
-                                                            <span class="content"><span class="duration">Superviseur: </span><?= $doc['superviseur']; ?></span>
+                                                            <span class="duration" >&nbsp; &nbsp; Mots clés :</span> <span> &nbsp; &nbsp; <?= $doc['cycle']; ?></span>
+                                                        </li>
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
+                                                            </div>
+                                                            <span class="duration" >&nbsp; &nbsp; Cycle :</span> <span> &nbsp; &nbsp; <?= $doc['cycle']; ?></span>
+                                                        </li>
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
+                                                            </div>
+                                                            <span class="duration" >&nbsp; &nbsp; Date archive :</span> <span>  &nbsp; &nbsp;<?= DBHelper::dateToFrench($doc['date_archive']); ?></span>
+                                                        </li>
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
+                                                            </div>
+                                                            <span class="duration">&nbsp; &nbsp; Année Academaique: </span> <span> &nbsp; &nbsp; <?= $doc['annee_academ']; ?></span>
+                                                        </li>
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="assets/images/movie/pictrue.png" alt="etudiant">
+                                                            </div>
+                                                            <span class="content"><span class="duration">Etudiant : </span>&nbsp; &nbsp; <?= $doc['etudiant']; ?></span>
+                                                        </li>
+                                                        <li>
+                                                            <div class="thumb">
+                                                                <img src="assets/images/movie/pictrue.png" alt="superviseur">
+                                                            </div>
+                                                            <span class="content"><span class="duration">Superviseur: </span>&nbsp; &nbsp; <?= $doc['superviseur']; ?></span>
                                                         </li>
                                                     </ul>
                                                     <div class="book-area">
@@ -343,7 +400,7 @@
                                                                     </a>
                                                                 </div>
                                                                 <div class="react-item mr-auto">
-                                                                    <a href="<?= URL::link("document-controller")."?id=".$doc["id"] ?>">
+                                                                    <a href="<?= URL::link("document")."?id=".$doc["id"]."#form" ?>">
                                                                         <div class="thumb">
                                                                             <img src="assets/images/icons/book.png" alt="modifier">
                                                                         </div>

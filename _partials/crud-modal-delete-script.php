@@ -7,11 +7,12 @@
         $modalDiv.addClass('loading');
         $.get('<?= URL::link("$model-controller");?>?id=' + id).then(
             window.location.href = '<?= URL::link("$model");?>#form'
-        )
+        ).then(location.reload())
         
         setTimeout(function() {
             $modalDiv.modal('hide').removeClass('loading');
             window.location.href = '<?= URL::link("$model");?>#form'
+            location.reload()
         }, 1000)
     });
     $('#confirm-delete').on('show.bs.modal', function(e) {

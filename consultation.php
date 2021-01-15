@@ -164,8 +164,19 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3 class="subtitle">Apercu du document</h3>
-                           
+                        <h3 class="subtitle">Apercu du document </h3>
+                        
+                        <?php if(UtilisateurService::checkActive()){?>
+                            <h5>
+                                <a href="<?= URL::link('document')."?id=".$document['id'] ?>" class="custom-button">
+                                    <i class="fa fa-edit"  aria-hidden="true"></i>  <span > Modifier</span>
+                                </a>
+                                <a  href="<?= URL::link('document-controller')."?id=".$document['id'] ?>" class="custom-button" class="dislike">
+                                    <i class="fa fa-trash-alt"  aria-hidden="true"></i>  <span > Supprimer</span>
+                                </a>
+                            </h5>
+                        <?php } ?>
+                        
                     </div>
                 </div>
                 <div id="pdf-preview" style="width: 100%;" >

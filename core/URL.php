@@ -39,7 +39,7 @@ class URL{
             
             case "contact":       $name = "contact";   break;
             case "apropos":       $name = "apropos";   break;
-            case "accueil":       $name = "accueil";   break;
+            case "accueil":       $name = "index";   break;
             case "connexion":     $name = "connexion";   break;
             case "deconnexion":     $name = "deconnexion";   break;
             case "inscription":       $name = "";   break;

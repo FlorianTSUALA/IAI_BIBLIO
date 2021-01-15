@@ -1,19 +1,19 @@
 <?php
 
-
     require_once('core/Redirector.php');
     require_once('core/service/EnseignantService.php');
     require_once('core/URL.php');
 
+    $enseignants = [];
     if(isset($_COOKIE['rechercher']) && $_COOKIE['rechercher'] == 'ON'){
         if(isset($_GET['mot_cle']) && !empty($_GET['mot_cle']))
             $enseignants = EnseignantService::sortBy($_GET['critere'], $_GET['parametre'], ['nom_prenom', 'departement'], $_GET['mot_cle']);
         else
-            $enseignants = EnseignantService::sort($_GET['critere'], $_GET['parametre']);
-    }else{
+            $enseignants = EnseignantService::sort($_COOKIE['critere'], $_COOKIE['parametre']);
+        }else{
         $enseignants = EnseignantService::getAll();
     }
-    
+
     $model = 'enseignant';
     $page = $model;
     $link = URL::link($model); 
