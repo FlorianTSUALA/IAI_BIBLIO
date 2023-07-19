@@ -57,8 +57,8 @@ class URL{
         return BASE_URL."media/PDF/".$name;
     }
 
-    public static function path(){
-
+    public static function res(){
+        
     }
 
 }

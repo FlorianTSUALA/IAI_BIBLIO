@@ -6,7 +6,6 @@
     <?php include "_partials/head.php" ?>
     <title> <?= $title??'Connexion - IAI Bibliotheque';?> </title>
 
-
 </head>
 
 <body>

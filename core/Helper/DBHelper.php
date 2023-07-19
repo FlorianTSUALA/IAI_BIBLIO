@@ -113,7 +113,7 @@ class DBHelper {
     return $result;
   }
 
-  public static function getLast($table, $total){
+  public static function getLast($table, $total = 1){
     $sql = "select * from $table order by date_modification desc limit $total; ";
     $req = DBHelper::connexion()->prepare($sql);
     $req->execute();
@@ -131,7 +131,7 @@ public static function getCount($table){
 
 public static function delete($table, $id){
     if ($id) {
-        $sql = "delete from {$table} where id={$_GET["id"]};";
+        $sql = "delete from {$table} where id={$id};";
         $req = DBHelper::connexion()->prepare($sql);
         $statut =$req->execute();
         return $statut;
@@ -139,8 +139,8 @@ public static function delete($table, $id){
 }
 
 public static function insert($table, $data){
-    $str_val = "";
-    $str_label = "";
+    $str_val = '';
+    $str_label = '';
     
     foreach($data as $key => $value){
         $str_label .= " {$key},";

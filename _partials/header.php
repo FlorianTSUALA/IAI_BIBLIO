@@ -3,7 +3,7 @@
             <div class="header-wrapper">
                 <div class="logo">
                     <a href="<?= URL::link('accueil') ?>">
-                        <img src="assets/images/logo/logo.png" alt="logo">
+                        <img src="assets/images/footer/footer-logo.png" alt="logo">
                     </a>
                 </div>
                 <ul class="menu">

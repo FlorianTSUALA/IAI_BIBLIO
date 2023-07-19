@@ -200,7 +200,7 @@
                                 
     <script>
         function goto(id, libelle){
-            window.location.href = "<?= URL::link($model) ?>?id="+id+"&libelle="+ libelle +"#form"
+            &window.location.href = "<?= URL::link($model) ?>?id="+id+"&libelle="+ libelle +"#form"
         }
     </script>
 </body>

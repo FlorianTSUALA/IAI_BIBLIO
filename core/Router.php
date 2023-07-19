@@ -18,7 +18,6 @@ class Router{
         
     }
 
-    //$this->render('sections.cantine.abonnement_cantine', compact('prix_abonnements', 'type_paiements', 'eleves', 'classes'));
 
     public function render(String $nameView, array $variables = [], string $template = 'default')
     {

@@ -2,13 +2,12 @@
     session_start();
 
     $page = "document-detail";
-    require_once('core/URL.php');
+    require_once 'core/URL.php';
     require_once 'core/service/UtilisateurService.php';
     require_once 'core/Helper/RequestHelper.php';
 
 
-    require_once('core/service/CycleService.php');
-    require_once('core/URL.php');
+    require_once 'core/service/CycleService.php';
 
         $id = RequestHelper::get('id');
 

@@ -17,7 +17,6 @@ class RequestHelper{
             return "";
     }
 
-
     
     public static function passwordEncode($password){
         return hash('sha256', $password);
@@ -31,6 +30,5 @@ class RequestHelper{
     public static function decodeUrlParam($param){
         return rawurldecode($param);
     }
-
 
 }

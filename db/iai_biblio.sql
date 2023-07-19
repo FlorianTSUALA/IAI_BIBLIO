@@ -12,7 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Listage de la structure de la table iai_bibliotheque. cycle
-DROP TABLE IF EXISTS `cycle`;
 CREATE TABLE IF NOT EXISTS `cycle` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(250) DEFAULT NULL,
@@ -31,7 +30,6 @@ INSERT INTO `cycle` (`id`, `libelle`, `date_creation`, `date_modification`) VALU
 /*!40000 ALTER TABLE `cycle` ENABLE KEYS */;
 
 -- Listage de la structure de la table iai_bibliotheque. document
-DROP TABLE IF EXISTS `document`;
 CREATE TABLE IF NOT EXISTS `document` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `theme` varchar(250) CHARACTER SET utf8 DEFAULT NULL,
@@ -64,7 +62,6 @@ INSERT INTO `document` (`id`, `theme`, `id_cycle`, `structure_accueil`, `etudian
 /*!40000 ALTER TABLE `document` ENABLE KEYS */;
 
 -- Listage de la structure de la table iai_bibliotheque. enseignant
-DROP TABLE IF EXISTS `enseignant`;
 CREATE TABLE IF NOT EXISTS `enseignant` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom_prenom` varchar(250) DEFAULT NULL,
@@ -83,7 +80,6 @@ INSERT INTO `enseignant` (`id`, `nom_prenom`, `departement`, `date_creation`, `d
 /*!40000 ALTER TABLE `enseignant` ENABLE KEYS */;
 
 -- Listage de la structure de la table iai_bibliotheque. pro
-DROP TABLE IF EXISTS `pro`;
 CREATE TABLE IF NOT EXISTS `pro` (
   `Colonne 1` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -93,7 +89,6 @@ CREATE TABLE IF NOT EXISTS `pro` (
 /*!40000 ALTER TABLE `pro` ENABLE KEYS */;
 
 -- Listage de la structure de la table iai_bibliotheque. utilisateur
-DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom_prenom` varchar(250) DEFAULT NULL,
