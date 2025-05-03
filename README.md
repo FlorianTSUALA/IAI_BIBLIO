@@ -48,7 +48,7 @@ Permettre la mise en ligne, la recherche et la consultation de documents numéri
 
 ### 1. Cloner le projet
 ```bash
-git clone https://github.com/votre-utilisateur/bibliotheque-numerique.git
+git clone https://github.com/FlorianTSUALA/IAI_BIBLIO.git
 ```
 
 ### 2. Configuration
